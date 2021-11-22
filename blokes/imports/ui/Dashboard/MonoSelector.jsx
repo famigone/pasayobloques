@@ -53,11 +53,11 @@ renderMenu(){return(
 
 
 
-          <Menu.Header>ENTIDADES</Menu.Header>
+          <Menu.Header>Programación Secuencial</Menu.Header>
 
           <Menu.Menu>
             <Menu.Item
-              name='enterprise'
+              name='1.1 Zombies en el parque'
               active={this.state.activeItem === 'enterprise'}
 
               onClick={() =>
@@ -65,7 +65,7 @@ renderMenu(){return(
               }
             />
             <Menu.Item
-              name='Actividad 1'
+              name='1.1 Zombies en el parque'
               as={Link}
               to="/experiencia01"
               onClick={this.handleItemClick}

@@ -16,7 +16,9 @@ import {
   Button,
   Divider,
   Form,
+  Card,
   Grid,
+  Image,
   Dropdown,
   Modal,
   Header
@@ -25,22 +27,86 @@ import {
 //const App = () => (
 
 export default class Experiencia extends Component {
+  constructor(props) {
+    super(props);
+
+    this.state = {
+      open:false, experiencia:0, activeItem:""
+    };
+  }
+
+  renderModal(){
+    return(
+      <Modal
+      onClose={() => this.setState({open:false})}
+      onOpen={() => this.setState({open:true}) }
+      open={this.state.open}
+      trigger={<Button>Show Modal</Button>}
+      size="fullscreen"
+    >
+      <Modal.Header>Select a Photo</Modal.Header>
+      <Modal.Content image>
+
+        <Modal.Description>
+          <Header>Default Profile Image</Header>
+            <MiBloque/>
+          <p>Is it okay to use this photo?</p>
+        </Modal.Description>
+      </Modal.Content>
+      <Modal.Actions>
+        <Button color='black' onClick={() => this.close()}>
+          Nope
+        </Button>
+        <Button
+          content="Yep, that's me"
+          labelPosition='right'
+          icon='checkmark'
+          onClick={() => setOpen(false)}
+          positive
+        />
+      </Modal.Actions>
+    </Modal>
+    )
+  }
+  show = () => this.setState({ open: true });
+  close = () => this.setState({ open: false });
   render() {
 
       return (
         <Segment.Group raised>
         <Segment >
+
           <Message
-   icon='star outline'
-   header='Have you heard about our mailing list?'
-   content='Get the best news in your e-mail every day.'
+   icon='book'
+   header='Narrativa'
+   content='Una noche, 3 Amigos estaban jugando en el parque, cuando de pronto aparecieron 5 Zombis! Que susto!.'
+   size='big'
  />
+ <Segment fluid>
+
+       <Header as='h2'>
+      <Image circular src='/img/zombi.png' />
+        <Header.Content>
+          Objetivo Didáctico
+          <Header.Subheader>El objetivo de esta experiencia es modelar entidades de datos
+            en el formato de variables.
+          </Header.Subheader>
+        </Header.Content>
+    </Header>
+
+
+
+
+
+   </Segment>
+ 
         </Segment>
         <Segment>
-          <Button content='Resolver' icon='up arrow' labelPosition='right' color="violet"/>
+          <Button content='Resolver' icon='up arrow' labelPosition='right' color="violet" onClick={this.show}/>
         </Segment>
         <Segment>
-          <MiBloque/>
+          {this.renderModal()}
+
         </Segment>
       </Segment.Group>
       );
