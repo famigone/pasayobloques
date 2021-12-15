@@ -34,13 +34,13 @@ export default class MonoSelector extends Component {
     super(props);
 
     this.state = {
-      open:false, setOpen:true, experiencia:0, activeItem:""
+      open:false, setOpen:true, experiencia:1, activeItem:""
     };
   }
 
 
 //handleItemClick = (e, { name }) => this.setState({ activeItem: name })
-handleItemClick(id) {
+handleItemClick(id) {  
   this.setState({ experiencia: id })
 }
 
@@ -65,10 +65,12 @@ renderMenu(){return(
               }
             />
             <Menu.Item
-              name='1.1 Zombies en el parque'
-              as={Link}
-              to="/experiencia01"
-              onClick={this.handleItemClick}
+              name='1.2 Zombies en el parque - Operando'
+              
+              
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
 
             />
           </Menu.Menu>
@@ -169,12 +171,7 @@ render() {
 
 return (
 <Grid>
-  <Grid.Row >
-    <Grid.Column width={1}></Grid.Column>
-    <Grid.Column width={14}>
-        {this.renderIntro()}
-    </Grid.Column>
-  </Grid.Row>
+  
   <Grid.Row>
         <Grid.Column width={1}></Grid.Column>
         <Grid.Column width={3}>

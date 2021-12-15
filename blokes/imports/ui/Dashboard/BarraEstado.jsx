@@ -28,14 +28,14 @@ export default class MenuExampleSecondary extends Component {
     const { activeItem } = this.state;
 
     return (
-      <Menu inverted color="teal">
+      <Menu  >
         <Menu.Item
           as={Link}
           to="/selector"
           onClick={this.handleItemClick}
         >
           {/*<Image centered size="tiny" src="/img/ripioh_white.png" />*/}
-          <b>PASAYO BLOQUES</b>
+          <Image src='/img/pasayo_bloques.png'  size="small"/>
         </Menu.Item>
         <Menu.Item
 

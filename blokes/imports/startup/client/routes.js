@@ -72,7 +72,7 @@ export const Ruteador = () => (
           <Route exact path="/analisis" component={Analisis} />
           <Route exact path="/descargar" component={Descargar} />
           <Route exact path="/usuarios" component={AbmUsuarios} />
-          <Route exact path="/secuencias/" component={MonoSelector}/>
+          <Route exact path="/secuencias" component={MonoSelector}/>
 
           <Route
             exact

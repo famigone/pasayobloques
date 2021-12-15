@@ -6,6 +6,8 @@ import { withTracker } from "meteor/react-meteor-data";
 import { updateLocacion } from "/api/methods.js";
 import { BlocklyWorkspace } from 'react-blockly';
 import Alert from "react-s-alert";
+import {experiencia} from "./experiencias"
+
 import {
   Icon,
   Label,
@@ -31,26 +33,48 @@ export default class Experiencia extends Component {
     super(props);
 
     this.state = {
-      open:false, experiencia:0, activeItem:""
+      open:false,
+      experiencia:this.props.experiencia,
+      activeItem:"",
+      objetivo: experiencia[this.props.experiencia].objetivo,
+      narrativa: experiencia[this.props.experiencia].narrativa,
+      demo: false
     };
   }
 
+
+componentDidUpdate(prevProps) {
+    if (
+      prevProps.experiencia !== this.props.experiencia
+    ) {
+      this.setState({
+      objetivo: experiencia[this.props.experiencia].objetivo,
+      narrativa: experiencia[this.props.experiencia].narrativa,
+
+      });
+}}
   renderModal(){
     return(
       <Modal
       onClose={() => this.setState({open:false})}
       onOpen={() => this.setState({open:true}) }
       open={this.state.open}
-      trigger={<Button>Show Modal</Button>}
+      //trigger={<Button>Show Modal</Button>}
       size="fullscreen"
     >
-      <Modal.Header>Select a Photo</Modal.Header>
+      <Modal.Header>
+      <Header as='h3'>
+        <Icon name='bullseye' />
+        <Header.Content>
+          {this.state.objetivo}
+          <Header.Subheader>{this.state.narrativa}</Header.Subheader>
+        </Header.Content>
+      </Header>
+      </Modal.Header>
       <Modal.Content image>
 
         <Modal.Description>
-          <Header>Default Profile Image</Header>
-            <MiBloque/>
-          <p>Is it okay to use this photo?</p>
+            <MiBloque demo={this.state.demo} experiencia={this.props.experiencia}/>
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
@@ -68,28 +92,29 @@ export default class Experiencia extends Component {
     </Modal>
     )
   }
-  show = () => this.setState({ open: true });
+  show = () => this.setState({ open: true, demo: false });
   close = () => this.setState({ open: false });
+  showDemo = () => this.setState({ open: true, demo: true });
   render() {
-
+    console.log(this.props.experiencia)
       return (
         <Segment.Group raised>
         <Segment >
 
           <Message
-   icon='book'
-   header='Narrativa'
-   content='Una noche, 3 Amigos estaban jugando en el parque, cuando de pronto aparecieron 5 Zombis! Que susto!.'
+   icon='bullseye'
+   header='Objetivo Didáctico'
+   content={this.state.objetivo}
    size='big'
+   color='teal'
  />
  <Segment fluid>
 
        <Header as='h2'>
-      <Image circular src='/img/zombi.png' />
+      
         <Header.Content>
-          Objetivo Didáctico
-          <Header.Subheader>El objetivo de esta experiencia es modelar entidades de datos
-            en el formato de variables.
+          Narrativa
+          <Header.Subheader> {this.state.narrativa}
           </Header.Subheader>
         </Header.Content>
     </Header>
@@ -99,14 +124,14 @@ export default class Experiencia extends Component {
 
 
    </Segment>
- 
+
         </Segment>
         <Segment>
           <Button content='Resolver' icon='up arrow' labelPosition='right' color="violet" onClick={this.show}/>
+          <Button content='Solución' icon='play' labelPosition='right' color="violet" onClick={this.showDemo}/>
         </Segment>
         <Segment>
-          {this.renderModal()}
-
+          {this.renderModal()}          
         </Segment>
       </Segment.Group>
       );
