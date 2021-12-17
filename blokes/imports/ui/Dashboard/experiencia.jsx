@@ -78,16 +78,10 @@ componentDidUpdate(prevProps) {
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='black' onClick={() => this.close()}>
-          Nope
+        <Button color='violet' onClick={() => this.close()}>
+          Salir
         </Button>
-        <Button
-          content="Yep, that's me"
-          labelPosition='right'
-          icon='checkmark'
-          onClick={() => setOpen(false)}
-          positive
-        />
+        
       </Modal.Actions>
     </Modal>
     )
@@ -96,7 +90,7 @@ componentDidUpdate(prevProps) {
   close = () => this.setState({ open: false });
   showDemo = () => this.setState({ open: true, demo: true });
   render() {
-    console.log(this.props.experiencia)
+    
       return (
         <Segment.Group raised>
         <Segment >
