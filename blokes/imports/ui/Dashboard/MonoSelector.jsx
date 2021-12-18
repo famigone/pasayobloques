@@ -53,7 +53,7 @@ renderMenu(){return(
 
 
 
-          <Menu.Header>Programación Secuencial</Menu.Header>
+          <Menu.Header>SECUENCIAS</Menu.Header>
 
           <Menu.Menu>
             <Menu.Item
@@ -65,36 +65,110 @@ renderMenu(){return(
               }
             />
             <Menu.Item
-              name='1.2 Zombies en el parque - Operando'
-              
-              
+              name='1.2 Zombies en el parque - Operando'                          
               onClick={() =>                
                 this.handleItemClick(2)
               }
-
             />
           </Menu.Menu>
         </Menu.Item>
 
         <Menu.Item>
-          <Menu.Header>OPERACIONES</Menu.Header>
+          <Menu.Header>ALTERNATIVAS SIMPLE</Menu.Header>
 
           <Menu.Menu>
+           <Menu.Item
+              name='2.1 Ataque marciano! '                          
+              onClick={() =>                
+                this.handleItemClick(3)
+              }
+            />
+            
             <Menu.Item
-              name='rails'
-              active={this.state.activeItem === 'rails'}
-              onClick={this.handleItemClick}
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
             />
             <Menu.Item
-              name='python'
-              active={this.state.activeItem === 'python'}
-              onClick={this.handleItemClick}
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
             />
             <Menu.Item
-              name='php'
-              active={this.state.activeItem === 'php'}
-              onClick={this.handleItemClick}
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
             />
+            <Menu.Item
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
+            />
+            <Menu.Item
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
+            />
+            <Menu.Item
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
+            />
+            <Menu.Item
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
+            />
+            <Menu.Item
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
+            />
+            <Menu.Item
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
+            />
+            <Menu.Item
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
+            />
+            <Menu.Item
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
+            />
+            <Menu.Item
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
+            />
+            <Menu.Item
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
+            />
+            <Menu.Item
+              name=''                          
+              onClick={() =>                
+                this.handleItemClick(2)
+              }
+            />
+            
           </Menu.Menu>
         </Menu.Item>
 

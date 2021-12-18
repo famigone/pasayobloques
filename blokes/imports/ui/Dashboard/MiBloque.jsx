@@ -4,6 +4,7 @@ import React, { useState } from "react";
 import { BlocklyWorkspace } from "react-blockly";
 import Blockly from "blockly";
 import {solucion} from "./soluciones"
+import {toolbar} from "./toolbar"
 import BlocklyJS from 'blockly/javascript';
 import {
   Icon,
@@ -34,100 +35,7 @@ export default function MiBloque({demo, experiencia}) {
   else 
     initialXml=""
 
-    const toolboxCategories = {
-      kind: "categoryToolbox",
-      contents: [
-        {
-          kind: "category",
-          name: "Mensajes",
-          colour: "#5CA65C",
-          contents: [
-          {
-              type: 'text',
-              kind: "block",
-              message0: '%1',
-              args0: [{
-                type: 'field_input',
-                name: 'TEXT',
-                text: '',
-              }],
-              output: 'String',
-              style: 'text_blocks',
-              helpUrl: '%{BKY_TEXT_TEXT_HELPURL}',
-              tooltip: '%{BKY_TEXT_TEXT_TOOLTIP}',
-              extensions: [
-                'text_quotes',
-                'parent_tooltip_when_inline',
-              ],
-          }, 
-          
-            {
-              kind: "block",
-              type: "text_print",              
-            },
-          ]
-        },        
-
-        {
-          kind: "category",
-          name: "Numeros",
-          colour: "#5CA65C",
-          contents: [
-            
-            {
-              kind: "block",
-              type: "math_number",
-            },
-          ],
-        },
-        
-        {
-          kind: "category",
-          name: "Variable",
-          colour: "#5CA65C",
-          custom: "VARIABLE",
-          contents: [
-
-            {
-              kind: "block",
-              "type": "variables_set_dynamic",
-    "message0": "%{BKY_VARIABLES_SET}",
-    "args0": [{
-      "type": "field_variable",
-      "name": "VAR",
-      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}"
-    },
-    {
-      "type": "input_value",
-      "name": "VALUE"
-    }
-    ],
-    "previousStatement": null,
-    "nextStatement": null,
-    "style": "variable_dynamic_blocks",
-    "tooltip": "%{BKY_VARIABLES_SET_TOOLTIP}",
-    "helpUrl": "%{BKY_VARIABLES_SET_HELPURL}",
-    "extensions": ["contextMenu_variableDynamicSetterGetter"]
-            },
-            {
-              kind: "block",
-              "type": "variables_get_dynamic",
-    "message0": "%1",
-    "args0": [{
-      "type": "field_variable",
-      "name": "VAR",
-      "variable": "%{BKY_VARIABLES_DEFAULT_NAME}"
-    }],
-    "output": null,
-    "style": "variable_dynamic_blocks",
-    "helpUrl": "%{BKY_VARIABLES_GET_HELPURL}",
-    "tooltip": "%{BKY_VARIABLES_GET_TOOLTIP}",
-    "extensions": ["contextMenu_variableDynamicSetterGetter"],
-            }
-          ],
-        },
-      ],
-    };
+    const toolboxCategories = toolbar[experiencia]
 
   function workspaceDidChange(workspace) {
     const code = Blockly.JavaScript.workspaceToCode(workspace);
