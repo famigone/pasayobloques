@@ -3,7 +3,7 @@ import ReactDOM from "react-dom";
 import { Meteor } from "meteor/meteor";
 import Experiencia from "./experiencia.jsx";
 import { withTracker } from "meteor/react-meteor-data";
-
+import BarraEstadoPublica from "./BarraEstadoPublica.jsx";
 import Alert from "react-s-alert";
 import {
   Link
@@ -244,10 +244,17 @@ render() {
 
 
 return (
-<Grid>
+   <div
+      style={{ backgroundColor: "#EEFAFA", width: "100%", height: "100%" }}
+      >
   
+  <BarraEstadoPublica />
+
+<Grid>
+
+
   <Grid.Row>
-        <Grid.Column width={1}></Grid.Column>
+        
         <Grid.Column width={3}>
               {this.renderMenu()}
         </Grid.Column>
@@ -256,6 +263,7 @@ return (
         </Grid.Column>
   </Grid.Row>
 </Grid>
+</div>
       );
 
   }

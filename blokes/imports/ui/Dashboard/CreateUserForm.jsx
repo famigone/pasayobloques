@@ -20,7 +20,7 @@ import {
   Segment
 } from "semantic-ui-react";
 
-export default class LoginForm extends Component {
+export default class CreateUserForm extends Component {
   constructor(props) {
     super(props);
 
@@ -96,7 +96,7 @@ export default class LoginForm extends Component {
                 />
 
               <Button color="teal" fluid size="large">
-                  Login
+                  Crear Usuario
                 </Button>
               </Segment>
             </Form>

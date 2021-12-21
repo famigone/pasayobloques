@@ -28,5 +28,7 @@ accounts-base@2.2.0
 aldeed:collection2
 aldeed:simple-schema
 session@1.2.0
-accounts-password@2.2.0
+accounts-password
 momentjs:moment
+accounts-google
+accounts-facebook

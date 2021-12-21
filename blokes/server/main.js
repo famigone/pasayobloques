@@ -1,6 +1,7 @@
 import { Meteor } from "meteor/meteor";
 
 import "/api/methods.js";
+import "../imports/api/experiencias.js";
 import "/api/insertPreguntasMujer.js";
 import "/api/insertPreguntasNena.js";
 import "/api/insertPreguntasNenaSegundoFem.js";

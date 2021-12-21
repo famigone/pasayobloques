@@ -1,6 +1,7 @@
 //este código tiene que estar disponible en servidor y cliente, para habilitar Optimistic UI.
 import { ValidatedMethod } from "meteor/mdg:validated-method";
 import ContactoPregunta from "/imports/api/contactoPregunta.js";
+import Experiencias from "/imports/api/experiencias.js";
 import Respuesta from "/imports/api/respuesta.js";
 import Regla from "/imports/api/regla.js";
 import ReglaMultiple from "/imports/api/reglaMultiple.js";
@@ -10,6 +11,81 @@ import { Meteor } from "meteor/meteor";
 import { options } from "./mapeo";
 //import { Mongo } from "meteor/mongo";
 //import { aggregate } from "meteor/sakulstra:aggregate";
+
+
+export const updateExperiencia = new ValidatedMethod({
+  name: "updateExperiencia",
+  validate: new SimpleSchema({
+    //idContacto
+    id: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id
+    }
+  }).validator(),
+  run(one) {
+    Experiencias.update(
+      { _id: one.id },
+      {
+        $set: {          
+          xml: one.xml
+        }
+      }
+    );
+  }
+});
+
+
+export const insertExperiencia = new ValidatedMethod({
+  name: "experiencia.insert",
+  validate: new SimpleSchema({
+  
+  //entidad, alternativa, etc
+  codigo: {
+    type: Number
+  },
+  xml: {
+    type: String
+  },
+  activo: {
+    type: Boolean
+  }, //borrado lógico
+  createdBy: {
+    type: String,
+    optional: true,
+    autoValue: function() {
+      return this.userId;
+    }
+  },
+  createdAt: {
+    type: Date,
+    optional: true,
+    autoValue: function() {
+      return new Date();
+    }
+  }
+  }).validator(),
+  run(one) {
+
+      one.activo = true;
+      return Experiencias.insert(one);
+       
+  }
+});
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 export const exportProtos = new ValidatedMethod({
   name: "exportProtos",

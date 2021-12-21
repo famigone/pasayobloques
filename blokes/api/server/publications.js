@@ -2,6 +2,7 @@ import Pregunta from "/imports/api/pregunta.js";
 import Contacto from "/imports/api/contacto.js";
 import Respuesta from "/imports/api/respuesta.js";
 import Regla from "/imports/api/regla.js";
+import Experiencias from "/imports/api/experiencias.js";
 import ReglaMultiple from "/imports/api/reglaMultiple.js";
 import ReglaMultipleDetalle from "/imports/api/reglaMultipleDetalle.js";
 import ContactoPregunta from "/imports/api/contactoPregunta.js";
@@ -9,6 +10,14 @@ import { Mongo } from "meteor/mongo";
 import { ReactiveAggregate } from "meteor/tunguska:reactive-aggregate";
 
 const MAX = 1000;
+
+
+Meteor.publish("experienciaOne", function(id) {  
+
+  let rta = Experiencias.find({ _id: id });  
+  console.log("zazaza "+rta)
+  return rta
+});
 
 Meteor.publish("pregunta", function() {
   return Pregunta.find({ activo: true });
@@ -168,10 +177,6 @@ Meteor.publish("respuestaOne", function(id) {
   return Respuesta.find({ contactoid: id, activo: true });
 });
 
-Meteor.publish("contactopregunta", function(id) {
-  //return ContactoPregunta.find();
-  return ContactoPregunta.find({ contactoid: id });
-});
 
 Meteor.publish("users", function() {
   //return ContactoPregunta.find();

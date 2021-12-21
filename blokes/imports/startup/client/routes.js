@@ -17,6 +17,7 @@ import { createBrowserHistory } from "history";
 // route components
 import App from "../../ui/Dashboard/App.jsx";
 
+
 import LoginForm from "../../ui/Dashboard/LoginForm.jsx";
 
 import PrivateRoute from "./PrivateRoute.jsx";
@@ -34,6 +35,7 @@ import ReglasMultiplesHome from "../../ui/Dashboard/ReglasMultiplesHome.jsx";
 
 import AbmUsuarios from "../../ui/Dashboard/abmUsuarios.jsx";
 import Experiencia from "../../ui/Dashboard/experiencia.jsx";
+import Colaborativo from "../../ui/Dashboard/Colaborativo.jsx";
 import NuevaPregunta from "../../ui/Dashboard/NuevaPregunta.jsx";
 import Analisis from "../../ui/Dashboard/Analisis.jsx";
 import Descargar from "../../ui/Dashboard/Descargar.jsx";
@@ -60,6 +62,10 @@ export const Ruteador = () => (
   <Router history={browserHistory}>
     <Switch>
       <Route exact path="/login" component={LoginForm} />
+      
+        <Route exact path="/experiencia" component={MonoSelector}/>
+        <Route exact path="/colaborativo/:id" component={Colaborativo}/>
+
       <PrivateRoute>
         <App>
 
@@ -72,7 +78,7 @@ export const Ruteador = () => (
           <Route exact path="/analisis" component={Analisis} />
           <Route exact path="/descargar" component={Descargar} />
           <Route exact path="/usuarios" component={AbmUsuarios} />
-          <Route exact path="/secuencias" component={MonoSelector}/>
+          
 
           <Route
             exact

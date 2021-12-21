@@ -23,19 +23,18 @@ import {
   Modal,
   Header
 } from "semantic-ui-react";
-export default function MiBloque({demo, experiencia, esColab}) {
+export default function MiBloqueColab({laExp}) {
   const [xml, setXml] = useState("");
   const [javascriptCode, setJavascriptCode] = useState("");
   
   
   //const initialXml = demo
   
-  if (demo) 
-    initialXml= solucion[experiencia];
-  else 
-    initialXml=""
+  
+    initialXml= laExp.xml;
+  
 
-    const toolboxCategories = toolbar[experiencia]
+    const toolboxCategories = toolbar[laExp.codigo]
 
   function workspaceDidChange(workspace) {
     const code = Blockly.JavaScript.workspaceToCode(workspace);
@@ -58,9 +57,9 @@ export default function MiBloque({demo, experiencia, esColab}) {
 
 
  
-
-    return (
-  <><p>
+      
+  return (
+    <><p>
       
   <Grid> 
    <Grid.Column width={2}>
@@ -70,7 +69,16 @@ export default function MiBloque({demo, experiencia, esColab}) {
    </Grid.Column> 
    <Grid.Column width={14}>
 
-    
+         <Message icon floating >
+        <Icon name='circle notched' loading color='violet'/>
+        <Message.Content>
+          <Message.Header>Link Colaborativo</Message.Header>
+          <p>Haciendo click en el botón de abajo, copiaras el link a esta experiencia. Podes compartilo con cualquier persona en en cualquier lugar y juntos pueden resolver la experiencia.</p>
+          <Button color="violet"  onClick={() => {navigator.clipboard.writeText(this.state.link)}} icon='copy'>
+            <Icon name="copy" /> Copiar el link
+          </Button>
+        </Message.Content>
+      </Message>
    </Grid.Column> 
    <Grid.Row/>
   </Grid> 
@@ -93,6 +101,7 @@ export default function MiBloque({demo, experiencia, esColab}) {
       />
   
     </>
-  );
+  )
+ 
     
 }

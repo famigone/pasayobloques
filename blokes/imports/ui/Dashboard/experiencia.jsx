@@ -6,7 +6,13 @@ import { withTracker } from "meteor/react-meteor-data";
 import { updateLocacion } from "/api/methods.js";
 import { BlocklyWorkspace } from 'react-blockly';
 import Alert from "react-s-alert";
-import {experiencia} from "./experiencias"
+import {experienciaArreglo} from "./experienciasArreglo"
+import Experiencias from "/imports/api/experiencias.js";
+import { insertExperiencia } from "/api/methods.js";
+import BotonRedirect from "./BotonRedirect"
+import { Redirect } from "react-router-dom";
+import { useHistory } from 'react-router-dom';
+
 
 import {
   Icon,
@@ -15,6 +21,7 @@ import {
   Message,
   Table,
   Segment,
+    Confirm,
   Button,
   Divider,
   Form,
@@ -29,16 +36,20 @@ import {
 //const App = () => (
 
 export default class Experiencia extends Component {
+
   constructor(props) {
     super(props);
 
     this.state = {
-      open:false,
+      openWorkspace:false,
       experiencia:this.props.experiencia,
       activeItem:"",
-      objetivo: experiencia[this.props.experiencia].objetivo,
-      narrativa: experiencia[this.props.experiencia].narrativa,
-      demo: false
+      objetivo: experienciaArreglo[this.props.experiencia].objetivo,
+      narrativa: experienciaArreglo[this.props.experiencia].narrativa,
+      demo: false,
+      share: false,
+      esColab:false
+
     };
   }
 
@@ -48,17 +59,17 @@ componentDidUpdate(prevProps) {
       prevProps.experiencia !== this.props.experiencia
     ) {
       this.setState({
-      objetivo: experiencia[this.props.experiencia].objetivo,
-      narrativa: experiencia[this.props.experiencia].narrativa,
+      objetivo: experienciaArreglo[this.props.experiencia].objetivo,
+      narrativa: experienciaArreglo[this.props.experiencia].narrativa,
 
       });
 }}
   renderModal(){
     return(
       <Modal
-      onClose={() => this.setState({open:false})}
-      onOpen={() => this.setState({open:true}) }
-      open={this.state.open}
+      onClose={() => this.setState({openWorkspace:false})}
+      onOpen={() => this.setState({openWorkspace:true}) }
+      open={this.state.openWorkspace}
       //trigger={<Button>Show Modal</Button>}
       size="fullscreen"
     >
@@ -74,7 +85,7 @@ componentDidUpdate(prevProps) {
       <Modal.Content image>
 
         <Modal.Description>
-            <MiBloque demo={this.state.demo} experiencia={this.props.experiencia}/>
+            <MiBloque demo={this.state.demo} experiencia={this.props.experiencia} esColab={this.state.esColab}/>
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
@@ -86,12 +97,59 @@ componentDidUpdate(prevProps) {
     </Modal>
     )
   }
-  show = () => this.setState({ open: true, demo: false });
-  close = () => this.setState({ open: false });
-  showDemo = () => this.setState({ open: true, demo: true });
+  show = () => this.setState({ openWorkspace: true, demo: false, esColab:false });
+  close = () => this.setState({ openWorkspace: false });
+  showDemo = () => this.setState({ openWorkspace: true, demo: true, esColab:false });
+  showCompartir = () => this.setState({ share:true });
+  //aquí
+  handleConfirm = () => {
+    //creamos la experiencia 
+    const exp = {codigo:this.state.experiencia,
+                  xml:"_",
+                  activo:true
+    }
+    //console.log("XML "+exp.xml)
+    
+    const id = insertExperiencia.call(exp, (err, res) => {
+        if (err) {
+          console.log(err);
+        } else {
+          console.log(<Redirect to={"/experiencia/"+id} />);
+          
+          return <Redirect to={"/experiencia/"+id} />
+        }
+      });
+    //this.setState({ share: false, openWorkspace:true, esColab:true });
+    //this.eliminar();
+  };
+  
+
+
+    handleSacudir = () => {
+    //creamos la experiencia 
+    const exp = {codigo:this.state.experiencia,
+                  xml:"_",
+                  activo:true
+    }
+    //console.log("XML "+exp.xml)
+    
+    const id = insertExperiencia.call(exp, (err, res) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    //this.setState({ share: false, openWorkspace:true, esColab:true });
+    //this.eliminar();
+  };
+  handleCancel = () => this.setState({ share: false });
+  
   render() {
     
       return (
+         <div
+      
+      >
+     
         <Segment.Group raised>
         <Segment >
 
@@ -121,13 +179,31 @@ componentDidUpdate(prevProps) {
 
         </Segment>
         <Segment>
+        <Grid>
+          <Grid.Row>
+          <Grid.Column size={1}/>
           <Button content='Resolver' icon='up arrow' labelPosition='right' color="violet" onClick={this.show}/>
-          <Button content='Solución' icon='play' labelPosition='right' color="violet" onClick={this.showDemo}/>
+          <Button content='Solución' icon='play' labelPosition='right' color="blue" onClick={this.showDemo}/>          
+          <BotonRedirect experiencia={this.props.experiencia}/>
+
+          </Grid.Row>
+        </Grid>  
+          <Confirm
+                  open={this.state.share}
+                  header= "Con esta opción tendrás disponible un link para compartir e interactuar con otros en la programación de la experiencia."
+                  content="Simplemente, enviales el link de la experiencia que te daremos a continuación."
+                  onCancel={this.handleCancel}
+                  onConfirm={this.handleConfirm}
+                  cancelButton='Cancelar'
+                  confirmButton="Compartir"
+                />
         </Segment>
         <Segment>
           {this.renderModal()}          
         </Segment>
       </Segment.Group>
+      </div>
+
       );
     }
   }
