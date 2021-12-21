@@ -76,31 +76,35 @@ function refreshPage() {
       
   return (
     <><p>
-      
+  
   <Grid> 
-   <Grid.Column width={2}>
-    <center>
-    <Button color="violet" onClick={runCode} circular icon='play' size="massive"/>
-    
-    </center>
-   </Grid.Column> 
-   <Grid.Column width={14}>
+
+   
+   <Grid.Column width={16}>
 
          <Message icon floating >
         <Icon name='circle notched' loading color='violet'/>
         <Message.Content>
+
           <Message.Header>Link Colaborativo</Message.Header>
+
           <p>Haciendo click en el botón de abajo, copiaras el link a esta experiencia. Podes compartilo con cualquier persona en en cualquier lugar y juntos pueden resolver la experiencia.</p>
           <Button color="violet"  onClick={() => {navigator.clipboard.writeText(link)}} icon='copy'>
             <Icon name="copy" /> Copiar el link
-          </Button>
-          
+          </Button>          
+        
           <Button color="blue" onClick={() => window.location.reload(false)}><Icon name="refresh" /> Actualizar</Button>
+          <Button color="purple"  onClick={runCode} ><Icon name="play"/>Ejecutar</Button>
+
+          
         </Message.Content>
       </Message>
-   </Grid.Column> 
+      
+   </Grid.Column>
+      
    <Grid.Row/>
   </Grid> 
+  
   </p>
 
       <BlocklyWorkspace
