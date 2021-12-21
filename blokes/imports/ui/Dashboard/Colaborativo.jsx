@@ -112,7 +112,7 @@ export default withTracker(
   () => {   
     let { id } = useParams();  
 
-  console.log(id)
+//  console.log(id)
 
     const handles = [
       Meteor.subscribe(
@@ -126,7 +126,7 @@ export default withTracker(
 
       
       var laExp = Experiencias.findOne(id)      
-      if (!loading) console.log(laExp)
+     // if (!loading) console.log(laExp)
     
 
     return {

@@ -20,7 +20,8 @@ export const updateExperiencia = new ValidatedMethod({
     id: {
       type: String,
       regEx: SimpleSchema.RegEx.Id
-    }
+    }, 
+    xml: {type:String}
   }).validator(),
   run(one) {
     Experiencias.update(
