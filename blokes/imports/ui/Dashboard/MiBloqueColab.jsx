@@ -1,12 +1,14 @@
 import "./App.css";
 import "./customBlocks/custom_Blocks";
-import React, { useState } from "react";
+import React, { useState, useCallback } from "react";
+import { useTracker } from 'meteor/react-meteor-data';
 import { BlocklyWorkspace } from "react-blockly";
 import Blockly from "blockly";
 import {solucion} from "./soluciones"
 import {toolbar} from "./toolbar"
 import BlocklyJS from 'blockly/javascript';
 import { updateExperiencia } from "/api/methods.js";
+import Experiencias from "/imports/api/experiencias.js";
 import {
   Icon,
   Label,
@@ -25,7 +27,10 @@ import {
   Header
 } from "semantic-ui-react";
 export default function MiBloqueColab({laExp}) {
-  let [xml, setXml] = useState("");
+  //const experiencia = useTracker(() => Experiencias.findOne(laExp._id));  
+  //console.log("experiencia experiencia "+experiencia._id)
+  //let [xml, setXml] = useState(experiencia.xml);  
+  let [xml, setXml] = useState(laExp.xml);
   const [javascriptCode, setJavascriptCode] = useState("");
   const link = "http://localhost:3000/colaborativo/"+laExp._id
   
@@ -86,16 +91,13 @@ function refreshPage() {
         <Icon name='circle notched' loading color='violet'/>
         <Message.Content>
 
-          <Message.Header>Link Colaborativo</Message.Header>
-
-          <p>Haciendo click en el botón de abajo, copiaras el link a esta experiencia. Podes compartilo con cualquier persona en en cualquier lugar y juntos pueden resolver la experiencia.</p>
           <Button color="violet"  onClick={() => {navigator.clipboard.writeText(link)}} icon='copy'>
             <Icon name="copy" /> Copiar el link
           </Button>          
         
           <Button color="blue" onClick={() => window.location.reload(false)}><Icon name="refresh" /> Actualizar</Button>
           <Button color="purple"  onClick={runCode} ><Icon name="play"/>Ejecutar</Button>
-
+<button onClick={() => forceUpdate()}>force update</button>
           
         </Message.Content>
       </Message>
