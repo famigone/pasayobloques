@@ -6,6 +6,7 @@ import Blockly from "blockly";
 import {solucion} from "./soluciones"
 import {toolbar} from "./toolbar"
 import BlocklyJS from 'blockly/javascript';
+
 import {
   Icon,
   Label,

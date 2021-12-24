@@ -282,134 +282,38 @@ toolbar[3] = {
             }
           ],
         },
+ 
+           {
+      "kind": "category",
+      "name": "Control",
+      "colour": "#5CA65C",
+      "contents": [
         {
-          kind: "category",
-          name: "Control",
-          colour: "#5CA65C",
-          contents: [
-          
-          
-     
-
-// Block for boolean data type: true and false.
-  {
-    'type': 'logic_boolean',
-     kind: "block",
-    'message0': '%1',
-    'args0': [
-      {
-        'type': 'field_dropdown',
-        'name': 'BOOL',
-        'options': [
-          ['%{BKY_LOGIC_BOOLEAN_TRUE}', 'TRUE'],
-          ['%{BKY_LOGIC_BOOLEAN_FALSE}', 'FALSE'],
-        ],
-      },
-    ],
-    'output': 'Boolean',
-    'style': 'logic_blocks',
-    'tooltip': '%{BKY_LOGIC_BOOLEAN_TOOLTIP}',
-    'helpUrl': '%{BKY_LOGIC_BOOLEAN_HELPURL}',
-  },
-  // Block for comparison operator.
-  {
-    'type': 'logic_compare',
-     kind: "block",
-    'message0': '%1 %2 %3',
-    'args0': [
-      {
-        'type': 'input_value',
-        'name': 'A',
-      },
-      {
-        'type': 'field_dropdown',
-        'name': 'OP',
-        'options': [
-          ['=', 'EQ'],
-          ['\u2260', 'NEQ'],
-          ['\u200F<', 'LT'],
-          ['\u200F\u2264', 'LTE'],
-          ['\u200F>', 'GT'],
-          ['\u200F\u2265', 'GTE'],
-        ],
-      },
-      {
-        'type': 'input_value',
-        'name': 'B',
-      },
-    ],
-    'inputsInline': true,
-    'output': 'Boolean',
-    'style': 'logic_blocks',
-    'helpUrl': '%{BKY_LOGIC_COMPARE_HELPURL}',
-    'extensions': ['logic_compare', 'logic_op_tooltip'],
-  },
-  // Block for if/elseif/else condition.
-  {
-    'type': 'controls_if',
-     kind: "block",
-    'message0': '%{BKY_CONTROLS_IF_MSG_IF} %1',
-    'args0': [
-      {
-        'type': 'input_value',
-        'name': 'IF0',
-        'check': 'Boolean',
-      },
-    ],
-    'message1': '%{BKY_CONTROLS_IF_MSG_THEN} %1',
-    'args1': [
-      {
-        'type': 'input_statement',
-        'name': 'DO0',
-      },
-    ],
-    'previousStatement': null,
-    'nextStatement': null,
-    'style': 'logic_blocks',
-    'helpUrl': '%{BKY_CONTROLS_IF_HELPURL}',
-    'suppressPrefixSuffix': true,
-    'mutator': 'controls_if_mutator',
-    'extensions': ['controls_if_tooltip'],
-  },
-   // If/else block that does not use a mutator.
-  {
-    'type': 'controls_ifelse',
-     kind: "block",
-    'message0': '%{BKY_CONTROLS_IF_MSG_IF} %1',
-    'args0': [
-      {
-        'type': 'input_value',
-        'name': 'IF0',
-        'check': 'Boolean',
-      },
-    ],
-    'message1': '%{BKY_CONTROLS_IF_MSG_THEN} %1',
-    'args1': [
-      {
-        'type': 'input_statement',
-        'name': 'DO0',
-      },
-    ],
-    'message2': '%{BKY_CONTROLS_IF_MSG_ELSE} %1',
-    'args2': [
-      {
-        'type': 'input_statement',
-        'name': 'ELSE',
-      },
-    ],
-    'previousStatement': null,
-    'nextStatement': null,
-    'style': 'logic_blocks',
-    'tooltip': '%{BKYCONTROLS_IF_TOOLTIP_2}',
-    'helpUrl': '%{BKY_CONTROLS_IF_HELPURL}',
-    'suppressPrefixSuffix': true,
-    'extensions': ['controls_if_tooltip'],
-  },
-
-
-
-          ]
-        },        
+          "kind": "block",
+          "type": "controls_if"
+        },
+      ]
+    },
+    {
+      "kind": "category",
+      "name": "Logic",
+      "colour": "#5CA65C",
+      "contents": [
+        {
+          "kind": "block",
+          "type": "logic_compare"
+        },
+        {
+          "kind": "block",
+          "type": "logic_operation"
+        },
+        {
+          "kind": "block",
+          "type": "logic_boolean"
+        }
+      ]
+    }
+         ,        
 
         {
           kind: "category",
