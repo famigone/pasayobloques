@@ -97,7 +97,7 @@ function refreshPage() {
         
           <Button color="blue" onClick={() => window.location.reload(false)}><Icon name="refresh" /> Actualizar</Button>
           <Button color="purple"  onClick={runCode} ><Icon name="play"/>Ejecutar</Button>
-<button onClick={() => forceUpdate()}>force update</button>
+
           
         </Message.Content>
       </Message>
