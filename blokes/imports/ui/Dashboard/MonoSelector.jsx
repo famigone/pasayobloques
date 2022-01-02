@@ -70,7 +70,15 @@ renderMenu(){return(
                 this.handleItemClick(2)
               }
             />
+               <Menu.Item
+              name='1.3 El extraño caso de las manzanas'                          
+              onClick={() =>                
+                this.handleItemClick(5)
+              }
+            />
+          
           </Menu.Menu>
+        
         </Menu.Item>
 
         <Menu.Item>
@@ -85,93 +93,47 @@ renderMenu(){return(
             />
             
             <Menu.Item
-              name=''                          
+              name='2.2 La fiesta de cumpleaños'                          
               onClick={() =>                
-                this.handleItemClick(2)
+                this.handleItemClick(4)
               }
             />
             <Menu.Item
-              name=''                          
+              name='2.3 El inspector de Unicornios'                          
               onClick={() =>                
-                this.handleItemClick(2)
+                this.handleItemClick(6)
               }
             />
-            <Menu.Item
-              name=''                          
-              onClick={() =>                
-                this.handleItemClick(2)
-              }
-            />
-            <Menu.Item
-              name=''                          
-              onClick={() =>                
-                this.handleItemClick(2)
-              }
-            />
-            <Menu.Item
-              name=''                          
-              onClick={() =>                
-                this.handleItemClick(2)
-              }
-            />
-            <Menu.Item
-              name=''                          
-              onClick={() =>                
-                this.handleItemClick(2)
-              }
-            />
-            <Menu.Item
-              name=''                          
-              onClick={() =>                
-                this.handleItemClick(2)
-              }
-            />
-            <Menu.Item
-              name=''                          
-              onClick={() =>                
-                this.handleItemClick(2)
-              }
-            />
-            <Menu.Item
-              name=''                          
-              onClick={() =>                
-                this.handleItemClick(2)
-              }
-            />
-            <Menu.Item
-              name=''                          
-              onClick={() =>                
-                this.handleItemClick(2)
-              }
-            />
-            <Menu.Item
-              name=''                          
-              onClick={() =>                
-                this.handleItemClick(2)
-              }
-            />
-            <Menu.Item
-              name=''                          
-              onClick={() =>                
-                this.handleItemClick(2)
-              }
-            />
-            <Menu.Item
-              name=''                          
-              onClick={() =>                
-                this.handleItemClick(2)
-              }
-            />
-            <Menu.Item
-              name=''                          
-              onClick={() =>                
-                this.handleItemClick(2)
-              }
-            />
+            
             
           </Menu.Menu>
         </Menu.Item>
 
+        <Menu.Item>
+          <Menu.Header>ALTERNATIVAS</Menu.Header>
+
+          <Menu.Menu>
+          <Menu.Item
+              name='3.1 Ataque marciano! '                          
+              onClick={() =>                
+                this.handleItemClick(7)
+              }
+            />
+            
+            <Menu.Item
+              name='3.2 La fiesta de cumpleaños'                          
+              onClick={() =>                
+                this.handleItemClick(8)
+              }
+            />
+            <Menu.Item
+              name='3.3 El inspector de Unicornios'                          
+              onClick={() =>                
+                this.handleItemClick(9)
+              }
+            />
+          </Menu.Menu>
+        </Menu.Item>
         <Menu.Item>
           <Menu.Header>ALTERNATIVA SIMPLE</Menu.Header>
 

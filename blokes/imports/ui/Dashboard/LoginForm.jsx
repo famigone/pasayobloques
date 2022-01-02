@@ -45,7 +45,7 @@ export default class LoginForm extends Component {
       } else {
         // successful log in
         //console.log("EXITOOOOOOOOOO");
-        this.props.history.push("/secuencias");
+        this.props.history.push("/selector");
       }
     });
   };
@@ -68,7 +68,7 @@ export default class LoginForm extends Component {
         <Grid.Row />
         <Grid.Row>
           <center>
-            <Image src="/img/pasayo_bloques.png"  size='large'/>
+            <Image src="/img/pasayo_bloques.png"  />
           </center>{" "}
         </Grid.Row>
         <Grid.Row>
@@ -94,11 +94,18 @@ export default class LoginForm extends Component {
                   onChange={this.onChangePassword}
                   value={this.state.password}
                 />
-
+              
               <Button color="teal" fluid size="large">
                   Login
                 </Button>
+                
+              
               </Segment>
+                <Link to="/register">
+                  <Button color="teal" fluid size="large">
+                    Crear cuenta PASAYO
+                  </Button>      
+                </Link>
             </Form>
             <Message>PASAYO BLOQUES es una plataforma comunitaria para aprender programación para niñas y niños en el espectro austa. Para solicitar usuario escribir a <b>C4@FI.UNCOMA.EDU.AR</b></Message>
           </Grid.Column>

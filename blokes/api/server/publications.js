@@ -15,7 +15,7 @@ const MAX = 1000;
 Meteor.publish("experienciaOne", function(id) {  
 
   let rta = Experiencias.find({ _id: id });  
-  console.log("zazaza "+rta)
+  //console.log("zazaza "+rta)
   return rta
 });
 
