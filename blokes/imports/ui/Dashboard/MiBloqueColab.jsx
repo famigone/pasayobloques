@@ -7,6 +7,7 @@ import Blockly from "blockly";
 import {solucion} from "./soluciones"
 import {toolbar} from "./toolbar"
 import BlocklyJS from 'blockly/javascript';
+import LoaderExampleText from "/imports/ui/Dashboard/LoaderExampleText.js";
 import { updateExperiencia } from "/api/methods.js";
 import Experiencias from "/imports/api/experiencias.js";
 import {
@@ -62,7 +63,17 @@ function refreshPage() {
     setJavascriptCode(code);
   }
 
- 
+   function inyectar() {
+    console.log("Inyectóooooz ")
+    //aca hay que actualizar la experiencia
+    const exp = {id: laExp._id, xml: xml}
+    setXml(xml)
+     updateExperiencia.call(exp, (err, res) => {
+        if (err) {
+          console.log(err);
+        }
+      });    
+  }
  function runCode() {
       console.log(javascriptCode)
       // Generate JavaScript code and run it.
@@ -75,11 +86,7 @@ function refreshPage() {
     } 
 
   
-
-
- 
-      
-  return (
+  return (    
     <><p>
   
   <Grid> 
@@ -111,7 +118,7 @@ function refreshPage() {
 
       <BlocklyWorkspace
         toolboxConfiguration={toolboxCategories}
-        initialXml={initialXml}
+        initialXml={laExp.xml}
         className="fill-height"        
         workspaceConfiguration={{
           grid: {
@@ -123,6 +130,7 @@ function refreshPage() {
         }}
         onWorkspaceChange={workspaceDidChange}
         onXmlChange={setXml}
+        //onInject={inyectar}
       />
   
     </>

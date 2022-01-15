@@ -73,6 +73,49 @@ export const insertExperiencia = new ValidatedMethod({
   }
 });
 
+export const insertExperienciaC4 = new ValidatedMethod({
+  name: "experienciaC4.insert",
+  validate: new SimpleSchema({
+  xml: {
+    type: String
+  },
+  narrativa: {
+    type: String
+  },
+  categoria: {
+    type: String
+  },
+  interes: {
+    type: String
+  },
+  objetivo: {
+    type: String
+  },
+  activo: {
+    type: Boolean
+  }, //borrado lógico
+  createdBy: {
+    type: String,
+    optional: true,
+    autoValue: function() {
+      return this.userId;
+    }
+  },
+  createdAt: {
+    type: Date,
+    optional: true,
+    autoValue: function() {
+      return new Date();
+    }
+  }
+  }).validator(),
+  run(one) {
+
+      one.activo = true;
+      return ExperienciasC4.insert(one);
+       
+  }
+});
 
 
 

@@ -44,7 +44,7 @@ export default class MenuExampleSecondary extends Component {
 
         </Menu.Item>
 
-        <Menu.Item as={Link} to="/secuencias" onClick={this.handleItemClick}>
+        <Menu.Item as={Link} to="/experiencia" onClick={this.handleItemClick}>
           <b>SECUENCIAS PROPUESTAS</b>
         </Menu.Item>
 
@@ -55,7 +55,13 @@ export default class MenuExampleSecondary extends Component {
         >
           <b>COMUNIDAD</b>
         </Menu.Item>
-
+ <Menu.Item
+          as={Link}
+          to="/home"
+          onClick={this.handleItemClick}
+        >
+          <b>HOME</b>
+        </Menu.Item>
 
         <Menu.Menu position="right">
 

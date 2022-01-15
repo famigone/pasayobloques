@@ -3,6 +3,7 @@ import Contacto from "/imports/api/contacto.js";
 import Respuesta from "/imports/api/respuesta.js";
 import Regla from "/imports/api/regla.js";
 import Experiencias from "/imports/api/experiencias.js";
+import ExperienciasC4 from "/imports/api/experienciasC4.js";
 import ReglaMultiple from "/imports/api/reglaMultiple.js";
 import ReglaMultipleDetalle from "/imports/api/reglaMultipleDetalle.js";
 import ContactoPregunta from "/imports/api/contactoPregunta.js";
@@ -10,10 +11,47 @@ import { Mongo } from "meteor/mongo";
 import { ReactiveAggregate } from "meteor/tunguska:reactive-aggregate";
 
 const MAX = 1000;
+const options = {
+    sort: { createdAt: -1 },    
+  };
+
+
+
+Meteor.publish("experienciasC4", function( filtroUsuario, filtroCategoria) {
+  console.log(filtroUsuario)
+    var filtros
+    if (filtroUsuario && !filtroCategoria) {
+      filtros= {
+        createdBy : Meteor.user,
+        activo:true      
+      }
+    }
+    else if (filtroUsuario && filtroCategoria) {
+      filtros= {
+        createdBy : Meteor.user,
+        categoria: filtroCategoria,
+        activo:true      
+      }
+    }
+    else if (!filtroUsuario && filtroCategoria) {
+      filtros= {
+        categoria: filtroCategoria,
+        activo:true      
+      }
+    }
+    else{
+    filtros= {     
+      activo:true      
+    }} 
+    console.log(filtros)
+    return ExperienciasC4.find(filtros, options);
+  
+  
+});
+
 
 
 Meteor.publish("experienciaOne", function(id) {  
-
   let rta = Experiencias.find({ _id: id });  
   //console.log("zazaza "+rta)
   return rta
@@ -22,6 +60,7 @@ Meteor.publish("experienciaOne", function(id) {
 Meteor.publish("pregunta", function() {
   return Pregunta.find({ activo: true });
 });
+
 
 Meteor.publish("reglas", function() {
   return Regla.find(

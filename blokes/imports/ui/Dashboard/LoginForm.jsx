@@ -14,6 +14,7 @@ import {
   Button,
   Form,
   Grid,
+  Icon,
   Header,
   Image,
   Message,
@@ -96,18 +97,27 @@ export default class LoginForm extends Component {
                 />
               
               <Button color="teal" fluid size="large">
-                  Login
+                  <Icon name="users"/>Loguearse en PASAYO
                 </Button>
                 
               
               </Segment>
+              <div>
                 <Link to="/register">
-                  <Button color="teal" fluid size="large">
-                    Crear cuenta PASAYO
+                  <Button color="violet" fluid size="large">
+                    <Icon name="user"/>Crear cuenta PASAYO
                   </Button>      
                 </Link>
+                <br/>
+                 <Link to="/experiencia">
+                  <Button color="purple" fluid size="large">
+                    <Icon name="braille"/>Activades Abiertas
+                  </Button>      
+                </Link>
+               </div>
+
             </Form>
-            <Message>PASAYO BLOQUES es una plataforma comunitaria para aprender programación para niñas y niños en el espectro austa. Para solicitar usuario escribir a <b>C4@FI.UNCOMA.EDU.AR</b></Message>
+            <Message color="purple">PASAYO BLOQUES es una plataforma comunitaria para aprender programación para niñas y niños en el espectro austa. Para solicitar usuario escribir a <b>C4@FI.UNCOMA.EDU.AR</b></Message>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row />

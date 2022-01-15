@@ -37,6 +37,7 @@ import AbmUsuarios from "../../ui/Dashboard/abmUsuarios.jsx";
 import Experiencia from "../../ui/Dashboard/experiencia.jsx";
 import {Register} from "../../ui/Dashboard/Register.jsx";
 import Colaborativo from "../../ui/Dashboard/Colaborativo.jsx";
+import Home from "../../ui/Dashboard/Home.jsx";
 import NuevaPregunta from "../../ui/Dashboard/NuevaPregunta.jsx";
 import Analisis from "../../ui/Dashboard/Analisis.jsx";
 import Descargar from "../../ui/Dashboard/Descargar.jsx";
@@ -73,6 +74,7 @@ export const Ruteador = () => (
           <Route exact path="/bloques/" component={Bloques} />
           <Route exact path="/texto/" component={Texto} />
           <Route exact path="/selector/" component={ListadoConsultas} />
+          <Route exact path="/home/" component={Home} />
 
           <Route exact path="/nuevapregunta/:id" children={<NuevaPregunta />} />
           <Route exact path="/nuevapregunta" component={NuevaPregunta} />

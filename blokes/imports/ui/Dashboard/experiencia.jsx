@@ -112,7 +112,7 @@ componentDidUpdate(prevProps) {
     
     const id = insertExperiencia.call(exp, (err, res) => {
         if (err) {
-          console.log(err);
+          console.log("chingo "+err);
         } else {
           console.log(<Redirect to={"/experiencia/"+id} />);
           

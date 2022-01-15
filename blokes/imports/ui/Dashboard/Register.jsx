@@ -120,27 +120,27 @@ function handleValueChangePass(e) {
     
   
               ,
-                <Button color="teal" fluid size="large" onClick={handleRegister}>
+                <Button color="violet" fluid size="large" onClick={handleRegister}>
                     Crear Cuenta PASAYO
                   </Button>      
               </Segment>
                      <Message
-    icon='inbox'
+    icon='heart'
     hidden= {exito}
     color= "blue"
     header='Felicitaciones! '
-    content='Ahora debes logearte presionando el botón Ya Tengo Cuenta.'
+    content='Ya podes loguearte.'
   />
               <Link to="/login">
-                  <Button color="teal" fluid size="large">
-                    Ya tengo cuenta
+                  <Button color="purple" fluid size="large">
+                    Loguearme con mi cuenta
                   </Button>      
                 </Link>
             </Form>
-    
+
     
   </GoogleReCaptchaProvider>,
-            <Message>PASAYO BLOQUES es una plataforma comunitaria para aprender programación para niñas y niños en el espectro austa. Para solicitar usuario escribir a <b>C4@FI.UNCOMA.EDU.AR</b></Message>
+            <Message color= "purple">PASAYO BLOQUES es una plataforma comunitaria para aprender programación para niñas y niños en el espectro austa. Para solicitar usuario escribir a <b>C4@FI.UNCOMA.EDU.AR</b></Message>
           </Grid.Column>
         </Grid.Row>
         <Grid.Row />
