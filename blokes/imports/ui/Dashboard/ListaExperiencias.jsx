@@ -40,6 +40,7 @@ import {
 export default function ListaExperiencias({ categoria, interes, filtroUsuario, filtroCategoria}) {
 ////////////////////////////////////////////////////////////////////////////////////
 let [open, setOpen] = useState(false);  
+let [exp, setExp] = useState("");  
 ////////////////////////////////////////////////////////////////////////////////////
 const src = '/img/c4.png'
 function renderImg (categoria) {
@@ -54,6 +55,11 @@ function renderImg (categoria) {
   return rta;
 
   }
+////////////////////////////////////////////////////////////////////////////////////
+function handleResolver(unaExp) {
+  setOpen(true)
+  setExp(unaExp)  
+}  
 ////////////////////////////////////////////////////////////////////////////////////
 const renderCard = (unaExp) => ( 
 <Card raised>
@@ -88,7 +94,7 @@ const renderCard = (unaExp) => (
       </Card.Content>
       <Card.Content extra>
         <div className='ui three buttons'>
-          <Button  color='teal' onClick={() => setOpen(true)}>
+          <Button  color='teal' onClick={() => handleResolver(unaExp)}>
             Resolver 
           </Button>
           <Button  color='teal'>
@@ -119,19 +125,19 @@ function renderModal(){
       <Header as='h3'>
         <Icon name='bullseye' />
         <Header.Content>
-          OBJETIVO ASFDASDF
-          <Header.Subheader>NARRATIVA GASDASDFASD</Header.Subheader>
+          {exp.categoria}
+          <Header.Subheader>{exp.narrativa}</Header.Subheader>
         </Header.Content>
       </Header>
       </Modal.Header>
       <Modal.Content image>
 
         <Modal.Description>
-            <MiBloqueC4 />
+            <MiBloqueC4 laExp = {exp}/>
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='violet' onClick={() => this.close()}>
+        <Button color='violet' onClick={() => setOpen(false)}>
           Salir
         </Button>
         

@@ -4,8 +4,9 @@ import React, { useState } from "react";
 import { BlocklyWorkspace } from "react-blockly";
 import Blockly from "blockly";
 import {solucion} from "./soluciones"
-import {toolbar} from "./toolbar"
+import {toolbar, toolModularidad, toolRepetitivas, toolSecuencia, toolAlternativaSimple} from "./toolbar"
 import BlocklyJS from 'blockly/javascript';
+
 
 import {
   Icon,
@@ -24,19 +25,24 @@ import {
   Modal,
   Header
 } from "semantic-ui-react";
-export default function MiBloqueC4({demo, experiencia, esColab}) {
+export default function MiBloqueC4({laExp}) {
   const [xml, setXml] = useState("");
   const [javascriptCode, setJavascriptCode] = useState("");
   
   
   //const initialXml = demo
   
-  if (demo) 
-    initialXml= solucion[experiencia];
-  else 
-    initialXml=""
+  
+    const toolboxCategories = codigo(laExp.experiencia)
 
-    const toolboxCategories = toolbar[experiencia]
+  function codigo(){    
+    var rta=0
+    if (laExp.categoria === "Secuencias") rta = toolSecuencia
+    else if (laExp.categoria === "Alternativa") rta = toolAlternativaSimple  
+    else if (laExp.categoria === "Repetitiva") rta = toolRepetitivas  
+    else if (laExp.categoria === "Modularidad") rta = toolModularidad    
+    return rta;  
+  }
 
   function workspaceDidChange(workspace) {
     const code = Blockly.JavaScript.workspaceToCode(workspace);
@@ -45,7 +51,7 @@ export default function MiBloqueC4({demo, experiencia, esColab}) {
 
 
  function runCode() {
-      console.log(javascriptCode)
+      //console.log(javascriptCode)
       // Generate JavaScript code and run it.
       
       try {
@@ -59,7 +65,7 @@ export default function MiBloqueC4({demo, experiencia, esColab}) {
 
 
  
-
+console.log(laExp.experiencia)
     return (
   <><p>
       
@@ -79,7 +85,7 @@ export default function MiBloqueC4({demo, experiencia, esColab}) {
 
       <BlocklyWorkspace
         toolboxConfiguration={toolboxCategories}
-        initialXml={initialXml}
+        initialXml={""}
         className="fill-height"        
         workspaceConfiguration={{
           grid: {

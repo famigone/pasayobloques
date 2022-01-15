@@ -162,6 +162,7 @@ const categoriasOptions = [
 
   ]
 ////////////////////////////////////////////////////////////////////////////////////
+
  handleInteres = (event) => {
     setInteres(event.target.value)
  };
@@ -174,48 +175,13 @@ const categoriasOptions = [
  handleCategoria = (event, data) => {  
     setCategoria(data.value)
  };
-
+ 
  function handleSalir() {
   setOpen(false)
   setmsgOk(true)
   setbtnGuardar(false)
  }
   
-////////////////////////////////////////////////////////////////////////////////////  
-function renderModalx(){
-    return(
-      <Modal
-      onClose={() => this.setState({openWorkspace:false})}
-      onOpen={() => this.setState({openWorkspace:true}) }
-      open={this.state.openWorkspace}
-      //trigger={<Button>Show Modal</Button>}
-      size="fullscreen"
-    >
-      <Modal.Header>
-      <Header as='h3'>
-        <Icon name='bullseye' />
-        <Header.Content>
-          OBJETIVO ASFDASDF
-          <Header.Subheader>NARRATIVA GASDASDFASD</Header.Subheader>
-        </Header.Content>
-      </Header>
-      </Modal.Header>
-      <Modal.Content image>
-
-        <Modal.Description>
-            <MiBloqueC4 />
-        </Modal.Description>
-      </Modal.Content>
-      <Modal.Actions>
-        <Button color='violet' onClick={() => this.close()}>
-          Salir
-        </Button>
-        
-      </Modal.Actions>
-    </Modal>
-    )
-  }
-
 
 /////////////////////////////////////////////////////////////////////////////////////////
 const renderForm = () => (
