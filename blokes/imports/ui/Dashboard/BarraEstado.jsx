@@ -37,12 +37,7 @@ export default class MenuExampleSecondary extends Component {
           {/*<Image centered size="tiny" src="/img/ripioh_white.png" />*/}
           <Image src='/img/pasayo_bloques.png'  size="small"/>
         </Menu.Item>
-        <Menu.Item
-
-        >
-
-
-        </Menu.Item>
+        
 
         <Menu.Item as={Link} to="/experiencia" onClick={this.handleItemClick}>
           <b>SECUENCIAS PROPUESTAS</b>
@@ -50,18 +45,12 @@ export default class MenuExampleSecondary extends Component {
 
         <Menu.Item
           as={Link}
-          to="/selector"
+          to="/home"
           onClick={this.handleItemClick}
         >
           <b>COMUNIDAD</b>
         </Menu.Item>
- <Menu.Item
-          as={Link}
-          to="/home"
-          onClick={this.handleItemClick}
-        >
-          <b>HOME</b>
-        </Menu.Item>
+ 
 
         <Menu.Menu position="right">
 
@@ -69,38 +58,7 @@ export default class MenuExampleSecondary extends Component {
 
 
 
-          {Meteor.user().username === "admin" ? (
-            <Menu.Item
-              name="users"
-              as={Link}
-              to="/descargar"
-              active={activeItem === "map"}
-              onClick={this.handleItemMap}
-            >
-              <Icon name="cloud download" />
-            </Menu.Item>
-          ) : null}
-
-          {Meteor.user().username === "admin" ? (
-            <Menu.Item
-              name="users"
-              as={Link}
-              to="/usuarios"
-              active={activeItem === "map"}
-              onClick={this.handleItemMap}
-            >
-              <Icon name="users" />
-            </Menu.Item>
-          ) : null}
-          {Meteor.user().username === "admin" ? (
-            <Menu.Item
-              as={Link}
-              to="/listadoconsultas"
-              onClick={this.handleItemClick}
-            >
-              <Icon name="th list" />
-            </Menu.Item>
-          ) : null}
+          
 
 
           <Menu.Item
@@ -111,6 +69,16 @@ export default class MenuExampleSecondary extends Component {
           >
             Salir
           </Menu.Item>
+          <Menu.Item
+          
+        >
+        <Image src='/img/c4.png'  size="tiny"/>
+          <b>COMUNIDAD</b>
+        </Menu.Item>
+
+
+          
+        
         </Menu.Menu>
       </Menu>
     );

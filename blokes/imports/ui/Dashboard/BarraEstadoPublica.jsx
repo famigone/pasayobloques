@@ -37,7 +37,17 @@ export default class BarraEstadoPublica extends Component {
           {/*<Image centered size="tiny" src="/img/ripioh_white.png" />*/}
           <Image src='/img/pasayo_bloques.png'  size="small"/>
         </Menu.Item>
-        
+                <Menu.Item as={Link} to="/experiencia" onClick={this.handleItemClick}>
+          <b>SECUENCIAS PROPUESTAS</b>
+        </Menu.Item>
+
+        <Menu.Item
+          as={Link}
+          to="/home"
+          onClick={this.handleItemClick}
+        >
+          <b>COMUNIDAD</b>
+        </Menu.Item>
 
        
 
@@ -47,9 +57,7 @@ export default class BarraEstadoPublica extends Component {
 
 
         <Menu.Item
-          as={Link}
-          to="/selector"
-          onClick={this.handleItemClick}
+          
         >
         <Image src='/img/c4.png'  size="tiny"/>
           <b>COMUNIDAD</b>

@@ -290,7 +290,7 @@ const renderModal= () => (
     </Modal>
   )
 ////////////////////////////////////////////////////////////////////////////////////
-console.log("1 filtroUsuario "+filtroUsuario)
+
   return(    
   <Grid>
         <Grid.Row>        

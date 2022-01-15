@@ -46,7 +46,7 @@ export default class LoginForm extends Component {
       } else {
         // successful log in
         //console.log("EXITOOOOOOOOOO");
-        this.props.history.push("/selector");
+        this.props.history.push("/home");
       }
     });
   };

@@ -104,6 +104,15 @@ const renderCard = (unaExp) => (
             Compartir
           </Button>
         </div>
+        <Divider/>
+        <Card.Content extra>
+      <div align="right">
+      <Label color="purple">
+        <Icon name='user' />
+        {Meteor.user().username}</Label>
+      </div>
+    </Card.Content>
+         
       </Card.Content>
 
     </Card>
@@ -178,11 +187,12 @@ const options = {
       { misExperiencias.map(unaExp => (
         renderCard(unaExp)))
       }
+      </Card.Group>
+  </div>
   )  
     
-  </Card.Group>
-  </div>
-  )
+  
+  
 
 
 }
