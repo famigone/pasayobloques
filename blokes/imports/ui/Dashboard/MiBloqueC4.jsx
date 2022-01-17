@@ -30,7 +30,7 @@ import {
 export default function MiBloqueC4({laExp, conSolucion}) {
   const [xml, setXml] = useState("");
   const [javascriptCode, setJavascriptCode] = useState("");
-  
+  const [msgOk, setmsgOk] = useState(true);
   
   //const initialXml = demo
   
@@ -68,6 +68,8 @@ function saveCode() {
      const rta = updateExperienciaC4.call(exp, (err, res) => {
         if (err) {
           console.log(err);
+        }else{
+          setmsgOk(false)
         }
       });    
     } 
@@ -119,13 +121,21 @@ const options = {
     <center>
     <Button color="violet" onClick={runCode} circular icon='play' size="massive"/>
     </center>
+  
    </Grid.Column>    
        <Grid.Column width={4}>    
         {botonSave}
        </Grid.Column> 
    
    <Grid.Column width={10}>
-
+   <h4>
+    <Message
+    icon='thumbtack'
+    header='Hemos guardado el código como solución para esta experiencia.'
+    color= "violet"
+    content='Podes cambiarlo cuando quieras.'
+    hidden={msgOk}
+  /></h4>
     
    </Grid.Column> 
    <Grid.Row/>
