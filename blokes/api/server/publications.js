@@ -17,18 +17,19 @@ const options = {
 
 
 
+
 Meteor.publish("experienciasC4", function( filtroUsuario, filtroCategoria) {
-  console.log(filtroUsuario)
+ 
     var filtros
     if (filtroUsuario && !filtroCategoria) {
       filtros= {
-        createdBy : Meteor.user,
+        createdBy : Meteor.userId(),
         activo:true      
       }
     }
     else if (filtroUsuario && filtroCategoria) {
       filtros= {
-        createdBy : Meteor.user,
+        createdBy : Meteor.userId(),
         categoria: filtroCategoria,
         activo:true      
       }
@@ -43,12 +44,18 @@ Meteor.publish("experienciasC4", function( filtroUsuario, filtroCategoria) {
     filtros= {     
       activo:true      
     }} 
-    console.log(filtros)
+    //console.log(filtros)
+    //console.log("Meteor.user "+Meteor.userId)
     return ExperienciasC4.find(filtros, options);
   
   
 });
 
+Meteor.publish("experienciasC4One", function(id) {  
+  let rta = ExperienciasC4.find({_id:id});    
+  return rta
+  console.log(rta)
+});
 
 
 Meteor.publish("experienciaOne", function(id) {  

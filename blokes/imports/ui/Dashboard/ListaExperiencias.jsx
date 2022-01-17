@@ -41,6 +41,7 @@ export default function ListaExperiencias({ categoria, interes, filtroUsuario, f
 ////////////////////////////////////////////////////////////////////////////////////
 let [open, setOpen] = useState(false);  
 let [exp, setExp] = useState("");  
+let [verSolucion, setverSolucion] = useState(false);  
 ////////////////////////////////////////////////////////////////////////////////////
 const src = '/img/c4.png'
 function renderImg (categoria) {
@@ -60,7 +61,28 @@ function handleResolver(unaExp) {
   setOpen(true)
   setExp(unaExp)  
 }  
+function handleVerSolucion(unaExp) {
+  setExp(unaExp)
+  setverSolucion(true)  
+  setOpen(true)  
+}  
 ////////////////////////////////////////////////////////////////////////////////////
+function renderSolucion(unaExp){
+let btn = "";
+  if (!(unaExp.xml ==="_"))
+    btn=<Button  color='violet' onClick={() => handleVerSolucion(unaExp)}>Solución</Button>
+  return (btn)
+}
+
+
+
+
+const currentUser = useTracker(() => Meteor.users.findOne(exp.createdBy), []);
+const creador = Meteor.users.findOne(exp.createdBy)
+//const user = users.findOne(Meteor.userId())
+//console.log("suarios: "+ creador)
+
+
 const renderCard = (unaExp) => ( 
 <Card raised>
       <Card.Content>
@@ -96,20 +118,18 @@ const renderCard = (unaExp) => (
         <div className='ui three buttons'>
           <Button  color='teal' onClick={() => handleResolver(unaExp)}>
             Resolver 
-          </Button>
-          <Button  color='teal'>
-            Solución
-          </Button>
+          </Button>          
           <Button  color='teal'>
             Compartir
           </Button>
+          {renderSolucion(unaExp)}
         </div>
         <Divider/>
         <Card.Content extra>
       <div align="right">
       <Label color="purple">
         <Icon name='user' />
-        {Meteor.user().username}</Label>
+        {Meteor.user().emails[0].address}</Label>
       </div>
     </Card.Content>
          
@@ -120,11 +140,15 @@ const renderCard = (unaExp) => (
 
   )
 ////////////////////////////////////////////////////////////////////////////////////
+function handleSalir(){
+   setOpen(false)
+   setverSolucion(false)
+}
 ////////////////////////////////////////////////////////////////////////////////////  
 function renderModal(){
     return(
       <Modal
-      onClose={() => setOpen(false)}
+      onClose={() => handleSalir}
       onOpen={() => setOpen(true) }
       open={open}
       //trigger={<Button>Show Modal</Button>}
@@ -142,11 +166,11 @@ function renderModal(){
       <Modal.Content image>
 
         <Modal.Description>
-            <MiBloqueC4 laExp = {exp}/>
+            <MiBloqueC4 laExp = {exp} conSolucion={verSolucion}/>
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <Button color='violet' onClick={() => setOpen(false)}>
+        <Button color='violet' onClick={handleSalir}>
           Salir
         </Button>
         

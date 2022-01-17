@@ -2,6 +2,7 @@
 import { ValidatedMethod } from "meteor/mdg:validated-method";
 import ContactoPregunta from "/imports/api/contactoPregunta.js";
 import Experiencias from "/imports/api/experiencias.js";
+import ExperienciasC4 from "/imports/api/experienciasC4.js";
 import Respuesta from "/imports/api/respuesta.js";
 import Regla from "/imports/api/regla.js";
 import ReglaMultiple from "/imports/api/reglaMultiple.js";
@@ -36,42 +37,28 @@ export const updateExperiencia = new ValidatedMethod({
 });
 
 
-export const insertExperiencia = new ValidatedMethod({
-  name: "experiencia.insert",
+export const updateExperienciaC4 = new ValidatedMethod({
+  name: "updateExperienciaC4",
   validate: new SimpleSchema({
-  
-  //entidad, alternativa, etc
-  codigo: {
-    type: Number
-  },
-  xml: {
-    type: String
-  },
-  activo: {
-    type: Boolean
-  }, //borrado lógico
-  createdBy: {
-    type: String,
-    optional: true,
-    autoValue: function() {
-      return this.userId;
-    }
-  },
-  createdAt: {
-    type: Date,
-    optional: true,
-    autoValue: function() {
-      return new Date();
-    }
-  }
+    //idContacto
+    id: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id
+    }, 
+    xml: {type:String}
   }).validator(),
   run(one) {
-
-      one.activo = true;
-      return Experiencias.insert(one);
-       
+   return ExperienciasC4.update(
+      { _id: one.id },
+      {
+        $set: {          
+          xml: one.xml
+        }
+      }
+    );
   }
 });
+
 
 export const insertExperienciaC4 = new ValidatedMethod({
   name: "experienciaC4.insert",
@@ -111,7 +98,7 @@ export const insertExperienciaC4 = new ValidatedMethod({
   }).validator(),
   run(one) {
 
-      one.activo = true;
+      one.activo = true;      
       return ExperienciasC4.insert(one);
        
   }
