@@ -197,7 +197,7 @@ const expLoading = useTracker(() => {
       
    <Grid.Row/>
   </Grid> 
-  <TextArea>{laExpTrack.xml}</TextArea>  
+
   </p>
 
       <BlocklyWorkspace
