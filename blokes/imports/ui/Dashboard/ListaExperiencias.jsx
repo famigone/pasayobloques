@@ -10,7 +10,7 @@ import Alert from "react-s-alert";
 import {experienciaArreglo} from "./experienciasArreglo"
 import Experiencias from "/imports/api/experiencias.js";
 import { insertExperiencia } from "/api/methods.js";
-import BotonRedirect from "./BotonRedirect"
+import BotonRedirectC4 from "./BotonRedirectC4"
 import { Redirect } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import LoaderExampleText from "/imports/ui/Dashboard/LoaderExampleText.js";
@@ -66,6 +66,12 @@ function handleVerSolucion(unaExp) {
   setverSolucion(true)  
   setOpen(true)  
 }  
+
+function handleCompartir(unaExp) {  
+  const history = useHistory(); 
+  history.push("/colaborativoc4/"+unaExp._id);
+}  
+
 ////////////////////////////////////////////////////////////////////////////////////
 function renderSolucion(unaExp){
 let btn = "";
@@ -119,9 +125,8 @@ const renderCard = (unaExp) => (
           <Button  color='teal' onClick={() => handleResolver(unaExp)}>
             Resolver 
           </Button>          
-          <Button  color='teal'>
-            Compartir
-          </Button>
+          
+          <BotonRedirectC4 experiencia={unaExp}/>
           {renderSolucion(unaExp)}
         </div>
         <Divider/>
@@ -209,7 +214,8 @@ const options = {
       {renderModal()} 
     <Card.Group itemsPerRow={3}>
       { misExperiencias.map(unaExp => (
-        renderCard(unaExp)))
+        renderCard(unaExp)
+        ))
       }
       </Card.Group>
   </div>

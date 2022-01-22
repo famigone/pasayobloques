@@ -27,7 +27,7 @@ const BotonRedirect = ({experiencia}) => {
     const history = useHistory();
 
     const handleClick = () => {
-    
+    console.log("experiencia "+experiencia)
     const exp = {codigo: experiencia,
                   xml:"_",
                   activo:true

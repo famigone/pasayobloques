@@ -51,6 +51,10 @@ export default function MiBloqueC4({laExp, conSolucion}) {
     setJavascriptCode(code);
   }
 
+function apagarMensaje() {
+  setmsgOk(true)
+}
+
 
  function runCode() {
       //console.log(javascriptCode)
@@ -70,6 +74,7 @@ function saveCode() {
           console.log(err);
         }else{
           setmsgOk(false)
+          setTimeout(apagarMensaje, 5000)
         }
       });    
     } 

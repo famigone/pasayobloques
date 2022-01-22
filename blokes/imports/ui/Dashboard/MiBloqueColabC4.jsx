@@ -5,11 +5,12 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { BlocklyWorkspace } from "react-blockly";
 import Blockly from "blockly";
 import {solucion} from "./soluciones"
-import {toolbar} from "./toolbar"
+
 import BlocklyJS from 'blockly/javascript';
 import LoaderExampleText from "/imports/ui/Dashboard/LoaderExampleText.js";
-import { updateExperiencia } from "/api/methods.js";
-import Experiencias from "/imports/api/experiencias.js";
+import { updateExperienciaC4 } from "/api/methods.js";
+import ExperienciasC4 from "/imports/api/experienciasC4.js";
+import {toolbar, toolModularidad, toolRepetitivas, toolSecuencia, toolAlternativaSimple} from "./toolbar"
 import {
   Icon,
   Label,
@@ -17,6 +18,7 @@ import {
   Message,
   Table,
   Segment,
+  TextArea,
   Button,
   Divider,
   Form,
@@ -27,7 +29,7 @@ import {
   Modal,
   Header
 } from "semantic-ui-react";
-export default function MiBloqueColab({laExp}) {
+export default function MiBloqueColabC4({laExp}) {
   //const experiencia = useTracker(() => Experiencias.findOne(laExp._id));  
   //console.log("experiencia experiencia "+experiencia._id)
   //let [xml, setXml] = useState(experiencia.xml);  
@@ -36,26 +38,33 @@ export default function MiBloqueColab({laExp}) {
   let [msgEjecutado, setmsgEjecutado] = useState(true);
   let [msgGuardado, setmsgGuardado] = useState(true);
   const [javascriptCode, setJavascriptCode] = useState("");
-  const link = "http://localhost:3000/colaborativo/"+laExp._id
+  const link = "http://localhost:3000/colaborativoc4/"+laExp._id
   
   //const initialXml = demo
   
   
-    initialXml= laExp.xml;
+
   
 
-    const toolboxCategories = toolbar[laExp.codigo]
 
 function refreshPage() {
     window.location.reload(false);
   }
-
+  const toolboxCategories = codigo(laExp.experiencia)
+    console.log(laExp.experiencia)
+  function codigo(){    
+    var rta=0
+    if (laExp.categoria === "Secuencias") rta = toolSecuencia
+    else if (laExp.categoria === "Alternativa") rta = toolAlternativaSimple  
+    else if (laExp.categoria === "Repetitiva") rta = toolRepetitivas  
+    else if (laExp.categoria === "Modularidad") rta = toolModularidad    
+    return rta;  
+  }
 
 
   function workspaceDidChange(workspace) {
   //  console.log(xml)
-    //aca hay que actualizar la experiencia
-    //BUG ESTO HACE MILLONES DE UPDATES POR SEGUNDO. HAY QUE HACER EXPLÍCITO EL GUARDADO.
+    //aca hay que actualizar la experiencia    
     const exp = {id: laExp._id, xml: xml}
     setXml(xml)
     // updateExperiencia.call(exp, (err, res) => {
@@ -71,7 +80,7 @@ function refreshPage() {
     //aca hay que actualizar la experiencia
     const exp = {id: laExp._id, xml: xml}
     setXml(xml)
-     updateExperiencia.call(exp, (err, res) => {
+     updateExperienciaC4.call(exp, (err, res) => {
         if (err) {
           console.log(err);
         }
@@ -105,7 +114,7 @@ function handleCopy() {
 
 function handleGuardar() {  
   const exp = {id: laExp._id, xml: xml}    
-     updateExperiencia.call(exp, (err, res) => {
+     updateExperienciaC4.call(exp, (err, res) => {
         if (err) {
           console.log(err);
         }else{
@@ -116,6 +125,21 @@ function handleGuardar() {
       });
   
 }  
+
+
+const expLoading = useTracker(() => {
+    const handle = Meteor.subscribe('experienciasC4One', laExp._id);
+    return !handle.ready();
+  }, []);
+    const laExpTrack = useTracker(() => ExperienciasC4.findOne(laExp._id),[]);
+   
+  
+  if (expLoading) {
+      return <LoaderExampleText />;
+    }else{
+
+  console.log(laExpTrack.xml)
+  initialXml= laExpTrack.xml; 
   return (    
     <><p>
   
@@ -173,12 +197,12 @@ function handleGuardar() {
       
    <Grid.Row/>
   </Grid> 
-  
+  <TextArea>{laExpTrack.xml}</TextArea>  
   </p>
 
       <BlocklyWorkspace
         toolboxConfiguration={toolboxCategories}
-        initialXml={laExp.xml}
+        initialXml={laExpTrack.xml}
         className="fill-height"        
         workspaceConfiguration={{
           grid: {
@@ -194,7 +218,7 @@ function handleGuardar() {
       />
   
     </>
-  )
+  )}
  
     
 }

@@ -104,7 +104,40 @@ export const insertExperienciaC4 = new ValidatedMethod({
   }
 });
 
+export const insertExperiencia = new ValidatedMethod({
+  name: "experiencia.insert",
+  validate: new SimpleSchema({
+   codigo: {
+    type: Number
+  },
+  xml: {
+    type: String
+  },
+  activo: {
+    type: Boolean
+  }, //borrado lógico
+  createdBy: {
+    type: String,
+    optional: true,
+    autoValue: function() {
+      return this.userId;
+    }
+  },
+  createdAt: {
+    type: Date,
+    optional: true,
+    autoValue: function() {
+      return new Date();
+    }
+  }
+  }).validator(),
+  run(one) {
 
+      one.activo = true;      
+      return Experiencias.insert(one);
+       
+  }
+});
 
 
 

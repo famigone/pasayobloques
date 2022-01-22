@@ -1,7 +1,7 @@
 import React, { Component} from "react";
 import ReactDOM from "react-dom";
 import { Meteor } from "meteor/meteor";
-import MiBloqueColab from "./MiBloqueColab.jsx";
+import MiBloqueColabC4 from "./MiBloqueColabC4.jsx";
 import { withTracker } from "meteor/react-meteor-data";
 import { BlocklyWorkspace } from 'react-blockly';
 import {experienciaArreglo} from "./experienciasArreglo"
@@ -9,7 +9,7 @@ import {toolbar} from "./toolbar"
 import Experiencias from "/imports/api/experiencias.js";
 import { insertExperiencia } from "/api/methods.js";
 import BotonRedirect from "./BotonRedirect"
-import BotonBack from "./BotonBack"
+import BotonBackC4 from "./BotonBackC4"
 import { Redirect } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import LoaderExampleText from "/imports/ui/Dashboard/LoaderExampleText.js";
@@ -39,7 +39,7 @@ import {
 
 //const App = () => (
 
-class Colaborativo extends Component {
+class ColaborativoC4 extends Component {
 
   constructor(props) {
     super(props);   
@@ -62,10 +62,9 @@ class Colaborativo extends Component {
   }
 
 
-handleClose(){  
-  console.log("clooooooooooose")
+handleClose(){    
   this.setState({hidden:true})
-  history.push("/experiencia");
+  history.push("/home");
 }
 
   renderModal(){
@@ -84,19 +83,19 @@ handleClose(){
       <Header as='h3'>
         <Icon name='bullseye' />
         <Header.Content>
-          {experienciaArreglo[this.props.Experiencia.codigo].objetivo}
-          <Header.Subheader>{experienciaArreglo[this.props.Experiencia.codigo].narrativa}</Header.Subheader>
+          {this.props.Experiencia.objetivo}
+          <Header.Subheader>{this.props.Experiencia.narrativa}</Header.Subheader>
         </Header.Content>
       </Header>
       </Modal.Header>
       <Modal.Content image>
 
         <Modal.Description>
-            <MiBloqueColab  laExp={this.props.Experiencia} />
+            <MiBloqueColabC4  laExp={this.props.Experiencia} />
         </Modal.Description>
       </Modal.Content>
       <Modal.Actions>
-        <BotonBack/>
+        <BotonBackC4/>
         
       </Modal.Actions>
     </Modal>
@@ -111,6 +110,7 @@ handleClose(){
     if (this.props.isLoading) {
       return <LoaderExampleText />;
     }
+    console.log("chigazo: "+this.props.Experiencia._id)
     return this.renderModal();
   }
 }
@@ -123,7 +123,7 @@ export default withTracker(
 
     const handles = [
       Meteor.subscribe(
-        "experienciaOne",
+        "experienciasC4One",
         id
       )
     ];
@@ -132,7 +132,7 @@ export default withTracker(
     
 
       
-      var laExp = Experiencias.findOne(id)      
+      var laExp = ExperienciasC4.findOne(id)      
      // if (!loading) console.log(laExp)
     
 
@@ -141,4 +141,4 @@ export default withTracker(
       Experiencia: laExp
     };
   }
-)(Colaborativo);
+)(ColaborativoC4);

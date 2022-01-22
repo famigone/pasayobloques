@@ -37,6 +37,7 @@ import AbmUsuarios from "../../ui/Dashboard/abmUsuarios.jsx";
 import Experiencia from "../../ui/Dashboard/experiencia.jsx";
 import {Register} from "../../ui/Dashboard/Register.jsx";
 import Colaborativo from "../../ui/Dashboard/Colaborativo.jsx";
+import ColaborativoC4 from "../../ui/Dashboard/ColaborativoC4.jsx";
 import Home from "../../ui/Dashboard/Home.jsx";
 import NuevaPregunta from "../../ui/Dashboard/NuevaPregunta.jsx";
 import Analisis from "../../ui/Dashboard/Analisis.jsx";
@@ -66,11 +67,12 @@ export const Ruteador = () => (
       <Route exact path="/login" component={LoginForm} />
       <Route exact path="/register" component={Register} />
         <Route exact path="/experiencia" component={MonoSelector}/>
-        <Route exact path="/colaborativo/:id" component={Colaborativo}/>
+        <Route exact path="/colaborativo/:id" component={Colaborativo}/>        
+        <Route exact path="/colaborativoc4/:id" component={ColaborativoC4}/>
 
       <PrivateRoute>
         <App>
-
+          
           <Route exact path="/bloques/" component={Bloques} />
           <Route exact path="/texto/" component={Texto} />
           <Route exact path="/selector/" component={ListadoConsultas} />
