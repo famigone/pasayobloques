@@ -18,9 +18,13 @@ const options = {
 
 
 
-Meteor.publish("experienciasC4", function( filtroUsuario, filtroCategoria) {
+Meteor.publish("experienciasC4", function( filtroUsuario, filtroCategoria, limit) {
  
     var filtros
+    const options = {
+      sort: { createdAt: -1 },
+      limit: Math.min(limit, MAX)
+    };
     if (filtroUsuario && !filtroCategoria) {
       filtros= {
         createdBy : Meteor.userId(),
@@ -57,6 +61,13 @@ Meteor.publish("experienciasC4One", function(id) {
   console.log(rta)
 });
 
+Meteor.publish("oneUser", function(id) {  
+  return Meteor.users.find({_id:id});        
+});
+
+Meteor.publish("users", function() {  
+  return Meteor.users.find();        
+});
 
 Meteor.publish("experienciaOne", function(id) {  
   let rta = Experiencias.find({ _id: id });  

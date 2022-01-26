@@ -67,6 +67,8 @@ handleClose(){
   history.push("/home");
 }
 
+
+
   renderModal(){
     return(
       <Modal
@@ -110,7 +112,7 @@ handleClose(){
     if (this.props.isLoading) {
       return <LoaderExampleText />;
     }
-    console.log("chigazo: "+this.props.Experiencia._id)
+   // console.log("chigazo: "+this.props.Experiencia._id)
     return this.renderModal();
   }
 }

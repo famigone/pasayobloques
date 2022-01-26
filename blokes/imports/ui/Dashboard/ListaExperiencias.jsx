@@ -38,12 +38,19 @@ import {
 //const App = () => (
 
 export default function ListaExperiencias({ categoria, interes, filtroUsuario, filtroCategoria}) {
+  const CONST_PAGINA = 20;
 ////////////////////////////////////////////////////////////////////////////////////
 let [open, setOpen] = useState(false);  
 let [exp, setExp] = useState("");  
+let [cantidad, setCantidad] = useState(CONST_PAGINA);  
 let [verSolucion, setverSolucion] = useState(false);  
 ////////////////////////////////////////////////////////////////////////////////////
 const src = '/img/c4.png'
+
+function cargarMas() {
+    setCantidad(cantidad + CONST_PAGINA)        
+  }
+
 function renderImg (categoria) {
   let rta = ""
   switch (categoria) {
@@ -134,7 +141,9 @@ const renderCard = (unaExp) => (
       <div align="right">
       <Label color="purple">
         <Icon name='user' />
-        {Meteor.user().emails[0].address}</Label>
+        {creadore(unaExp.createdBy) }
+      </Label>
+
       </div>
     </Card.Content>
          
@@ -144,11 +153,27 @@ const renderCard = (unaExp) => (
 
 
   )
+
 ////////////////////////////////////////////////////////////////////////////////////
 function handleSalir(){
    setOpen(false)
    setverSolucion(false)
 }
+const userLoading = useTracker(() => {
+    const handle = Meteor.subscribe('users');
+    return !handle.ready();
+    }, []);
+function creadore(idx){
+  
+    
+    
+      return Meteor.users.findOne(idx).emails[0].address;
+
+     
+  
+
+}
+
 ////////////////////////////////////////////////////////////////////////////////////  
 function renderModal(){
     return(

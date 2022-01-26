@@ -36,7 +36,7 @@ export default function MiBloqueC4({laExp, conSolucion}) {
   
   
     const toolboxCategories = codigo(laExp.experiencia)
-    console.log(laExp.experiencia)
+    //console.log(laExp.experiencia)
   function codigo(){    
     var rta=0
     if (laExp.categoria === "Secuencias") rta = toolSecuencia
@@ -54,6 +54,7 @@ export default function MiBloqueC4({laExp, conSolucion}) {
 function apagarMensaje() {
   setmsgOk(true)
 }
+
 
 
  function runCode() {

@@ -1,6 +1,6 @@
 import "./App.css";
 import "./customBlocks/custom_Blocks";
-import React, { useState, useCallback } from "react";
+import React, { useState, useEffect,useCallback } from "react";
 import { useTracker } from 'meteor/react-meteor-data';
 import { BlocklyWorkspace } from "react-blockly";
 import Blockly from "blockly";
@@ -44,14 +44,17 @@ export default function MiBloqueColabC4({laExp}) {
   
   
 
-  
+  //////////////////////////////////////////////////////////////////////////////////
+useEffect(() => {
+   console.log('useEffect se lanza solo cuando el componente se monta'); 
+}, [xml])
 
 
 function refreshPage() {
     window.location.reload(false);
   }
   const toolboxCategories = codigo(laExp.experiencia)
-    console.log(laExp.experiencia)
+   // console.log(laExp.experiencia)
   function codigo(){    
     var rta=0
     if (laExp.categoria === "Secuencias") rta = toolSecuencia
@@ -127,18 +130,19 @@ function handleGuardar() {
 }  
 
 
+
 const expLoading = useTracker(() => {
     const handle = Meteor.subscribe('experienciasC4One', laExp._id);
     return !handle.ready();
-  }, []);
-    const laExpTrack = useTracker(() => ExperienciasC4.findOne(laExp._id),[]);
+  });
+    const laExpTrack = useTracker(() =>  ExperienciasC4.findOne(laExp._id));
    
   
   if (expLoading) {
       return <LoaderExampleText />;
     }else{
 
-  console.log(laExpTrack.xml)
+  //console.log(laExpTrack.xml)
   initialXml= laExpTrack.xml; 
   return (    
     <><p>
@@ -197,7 +201,7 @@ const expLoading = useTracker(() => {
       
    <Grid.Row/>
   </Grid> 
-
+  
   </p>
 
       <BlocklyWorkspace
