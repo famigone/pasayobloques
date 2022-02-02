@@ -37,12 +37,11 @@ import {
 
 //const App = () => (
 
-export default function ListaExperiencias({ categoria, interes, filtroUsuario, filtroCategoria}) {
-  const CONST_PAGINA = 20;
+export default function ListaExperiencias({ categoria, interes, filtroUsuario, filtroCategoria, cantidad}) {
+
 ////////////////////////////////////////////////////////////////////////////////////
 let [open, setOpen] = useState(false);  
 let [exp, setExp] = useState("");  
-let [cantidad, setCantidad] = useState(CONST_PAGINA);  
 let [verSolucion, setverSolucion] = useState(false);  
 ////////////////////////////////////////////////////////////////////////////////////
 const src = '/img/c4.png'
@@ -90,8 +89,8 @@ let btn = "";
 
 
 
-const currentUser = useTracker(() => Meteor.users.findOne(exp.createdBy), []);
-const creador = Meteor.users.findOne(exp.createdBy)
+const creador = useTracker(() => Meteor.users.findOne(exp.createdBy), []);
+//const creador = Meteor.users.findOne(exp.createdBy)
 //const user = users.findOne(Meteor.userId())
 //console.log("suarios: "+ creador)
 
@@ -122,7 +121,7 @@ const renderCard = (unaExp) => (
         <div className='ui three buttons'>
         <Card.Meta>
           <Label as='a' color='violet' tag>
-            {unaExp.interes}
+            {unaExp.interesDescripcion()}
           </Label>          
         </Card.Meta>
         </div>
@@ -163,15 +162,13 @@ const userLoading = useTracker(() => {
     const handle = Meteor.subscribe('users');
     return !handle.ready();
     }, []);
+
 function creadore(idx){
-  
-    
-    
-      return Meteor.users.findOne(idx).emails[0].address;
-
-     
-  
-
+  let rta= ""
+  if (idx) {      
+      rta= Meteor.users.findOne(idx).emails[0].address;     
+  }
+  return rta;
 }
 
 ////////////////////////////////////////////////////////////////////////////////////  
@@ -215,7 +212,8 @@ function renderModal(){
 
  
  const expLoading = useTracker(() => {
-    const handle = Meteor.subscribe('experienciasC4', filtroUsuario, filtroCategoria);
+ // console.log("interes interes "+ interes)
+    const handle = Meteor.subscribe('experienciasC4', filtroUsuario, filtroCategoria, cantidad, interes);      
     return !handle.ready();
   });
 

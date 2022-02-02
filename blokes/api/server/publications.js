@@ -3,6 +3,7 @@ import Contacto from "/imports/api/contacto.js";
 import Respuesta from "/imports/api/respuesta.js";
 import Regla from "/imports/api/regla.js";
 import Experiencias from "/imports/api/experiencias.js";
+import Interes from "/imports/api/interes.js";
 import ExperienciasC4 from "/imports/api/experienciasC4.js";
 import ReglaMultiple from "/imports/api/reglaMultiple.js";
 import ReglaMultipleDetalle from "/imports/api/reglaMultipleDetalle.js";
@@ -10,38 +11,65 @@ import ContactoPregunta from "/imports/api/contactoPregunta.js";
 import { Mongo } from "meteor/mongo";
 import { ReactiveAggregate } from "meteor/tunguska:reactive-aggregate";
 
-const MAX = 1000;
+const MAX = 200;
 const options = {
     sort: { createdAt: -1 },    
   };
 
 
+Meteor.publish("intereses", function() {  
+  let rta = Interes.find({activo:true});    
+  return rta  
+});
 
 
-Meteor.publish("experienciasC4", function( filtroUsuario, filtroCategoria, limit) {
+Meteor.publish("experienciasC4", function( filtroUsuario, filtroCategoria, limit, interes) {
  
     var filtros
     const options = {
       sort: { createdAt: -1 },
       limit: Math.min(limit, MAX)
     };
-    if (filtroUsuario && !filtroCategoria) {
+    if (filtroUsuario && !filtroCategoria && !interes) {
       filtros= {
         createdBy : Meteor.userId(),
         activo:true      
       }
     }
-    else if (filtroUsuario && filtroCategoria) {
+    else if (filtroUsuario && filtroCategoria && !interes) {
       filtros= {
         createdBy : Meteor.userId(),
         categoria: filtroCategoria,
         activo:true      
       }
     }
-    else if (!filtroUsuario && filtroCategoria) {
+    else if (!filtroUsuario && filtroCategoria && !interes) {
       filtros= {
         categoria: filtroCategoria,
         activo:true      
+      }
+    }
+    /////////////
+    else if (filtroUsuario && !filtroCategoria && interes) {
+      filtros= {
+        createdBy : Meteor.userId(),
+        activo:true ,
+        interes: interes     
+      }
+    }
+    else if (filtroUsuario && filtroCategoria && interes) {
+      filtros= {
+        createdBy : Meteor.userId(),
+        categoria: filtroCategoria,
+        activo:true,
+        interes: interes      
+      }
+    }
+    else if (!filtroUsuario && filtroCategoria && interes) {
+      filtros= {
+        categoria: filtroCategoria,
+        activo:true,
+        interes: interes      
       }
     }
     else{
@@ -58,7 +86,7 @@ Meteor.publish("experienciasC4", function( filtroUsuario, filtroCategoria, limit
 Meteor.publish("experienciasC4One", function(id) {  
   let rta = ExperienciasC4.find({_id:id});    
   return rta
-  console.log(rta)
+  //console.log(rta)
 });
 
 Meteor.publish("oneUser", function(id) {  

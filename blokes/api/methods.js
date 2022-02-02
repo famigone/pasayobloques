@@ -141,6 +141,36 @@ export const insertExperiencia = new ValidatedMethod({
 
 
 
+export const insertInteres = new ValidatedMethod({
+  name: "Interes.insert",
+  validate: new SimpleSchema({
+   descripcion: {
+    type: String
+  },
+  createdBy: {
+    type: String,
+    optional: true,
+    autoValue: function() {
+      return this.userId;
+    }
+  },
+  createdAt: {
+    type: Date,
+    optional: true,
+    autoValue: function() {
+      return new Date();
+    }
+  }
+  }).validator(),
+  run(one) {
+
+      one.activo = true;      
+      return Interes.insert(one);
+       
+  }
+});
+
+
 
 
 

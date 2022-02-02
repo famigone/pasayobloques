@@ -10,7 +10,9 @@ import {toolbar} from "./toolbar"
 import BlocklyJS from 'blockly/javascript';
 
 import { insertExperienciaC4 } from "/api/methods.js";
+import { insertInteres } from "/api/methods.js";
 import ExperienciasC4 from "/imports/api/experienciasC4.js";
+import Interes from "/imports/api/interes.js";
 import LoaderExampleText from "/imports/ui/Dashboard/LoaderExampleText.js";
 import ListaExperiencias from "/imports/ui/Dashboard/ListaExperiencias.jsx";
 import MiBloqueC4 from "/imports/ui/Dashboard/MiBloqueC4.jsx";
@@ -34,32 +36,35 @@ import {
   Header
 } from "semantic-ui-react";
 export default function Home() {
+const CONST_PAGINA = 20;
 ////////////////////////////////////////////////////////////////////////////////////
 let [open, setOpen] = useState(false);  
+let [openInteres, setOpenInteres] = useState(false);  
 let [objetivo, setObjetivo] = useState("");  
 let [narrativa, setNarrativa] = useState("");  
 let [interes, setInteres] = useState("");  
 let [categoria, setCategoria] = useState("");  
+let [nuevoInteres, setNuevoInteres] = useState("");  
 let [btnGuardar, setbtnGuardar] = useState(false);  
 let [msgOk, setmsgOk] = useState(true);  
 let [filtroUsuario, setfiltroUsuario] = useState(true);  
 let [filtroCategoria, setfiltroCategoria] = useState(false);  
+let [cantidad, setCantidad] = useState(CONST_PAGINA);  
+
 ////////////////////////////////////////////////////////////////////////////////////
+function cargarMas() {
+    setCantidad(cantidad + CONST_PAGINA)        
+  }
+//////////////////////////////////////////////////////////////////////////////////
 function renderSelector(){
   return(
   
       <div>
       <Grid>
-      <Grid.Column width={4}>
-       
-        <Button color="purple" type="submit"   onClick={() => setOpen(true)}>
-          <Icon name="plus"/>NUEVA EXPERIENCIA
-        </Button>
-       
-      </Grid.Column>       
-
-      <Grid.Column width={12}>
-      
+          
+  
+      <Grid.Row >
+         <Grid.Column> 
         <Form onSubmit={(e) => handleSelector(e)}>
            <Form.Group> 
        
@@ -78,21 +83,47 @@ function renderSelector(){
        <Form.Field>
                 
                 <Dropdown
-                  inline
-                  placeholder='CATEGORÍA'
                   
+                  placeholder='CATEGORÍA'
+                  clearable
                   selection
                   options={categoriasOptions}                  
                   onChange={handleFiltroCategoria}
                 />
 
               </Form.Field>
+                <Form.Field>
                 
+                <Dropdown
+                  
+                  placeholder='INTERÉS'
+                  clearable
+                  selection
+                  search
+                  options={interesOptions()}
+                  onChange={handleInteres}
+                />
+
+              </Form.Field>
            </Form.Group>   
          </Form>     
+        </Grid.Column>   
+       </Grid.Row>
+  
+      <Grid.Column> 
+      <Grid.Row >
+          <Button.Group> 
+            <Button color="purple" type="submit"   onClick={() => setOpen(true)}>
+              <Icon name="plus"/>NUEVA EXPERIENCIA
+            </Button>
 
-       </Grid.Column>
-      
+            <Button color="violet" type="submit"   onClick={() => setCantidad(cantidad + CONST_PAGINA)}>
+              <Icon name="retweet"/>CARGAR MÁS
+            </Button> 
+
+           </Button.Group>  
+        </Grid.Row>   
+        </Grid.Column> 
        </Grid>
       </div>
   
@@ -132,6 +163,20 @@ function handleSubmit(e) {
       });
 
   }
+
+  ////////////////////////////////////////////////////////////////////////////////////
+function handleSubmitInteres(e) { 
+
+   let inter =    {descripcion: nuevoInteres} 
+   const id = insertInteres.call(inter, (err, res) => {
+        if (err) {
+          console.log(err);
+        }else{          
+          setOpenInteres(false)
+        }
+      });
+
+  }
 ////////////////////////////////////////////////////////////////////////////////////
 
 const categoriasOptions = [
@@ -163,8 +208,38 @@ const categoriasOptions = [
   ]
 ////////////////////////////////////////////////////////////////////////////////////
 
- handleInteres = (event) => {
-    setInteres(event.target.value)
+const interesLoading = useTracker(() => {
+    const handle = Meteor.subscribe('intereses');
+    return !handle.ready();
+  });
+
+  
+  const miInteres = useTracker(() => 
+    Interes.find({}).fetch());
+
+
+
+ interesOptions = () => {
+   let rta= "" 
+   if (!interesLoading) {
+      rta = miInteres      
+   
+   rta= rta.map(function(interes) {  
+                          let uno= {key : interes._id, 
+                            text : interes.descripcion,
+                           value : interes._id}
+                          return uno; 
+                }) 
+ }
+ //  console.log("quedo: "+rta)
+   return(rta)
+ };
+
+ 
+
+//////////////////////////////////////////////////////////////////////////////////
+ handleNuevoInteres = (event) => {
+    setNuevoInteres(event.target.value)
  };
  handleObjetivo = (event) => {  
     setObjetivo(event.target.value)
@@ -176,6 +251,11 @@ const categoriasOptions = [
     setCategoria(data.value)
  };
  
+handleInteres = (event, data) => {  
+    setInteres(data.value)
+    //console.log(data.value)
+ };
+
  function handleSalir() {
   setOpen(false)
   setmsgOk(true)
@@ -188,7 +268,7 @@ const renderForm = () => (
         
         
 
-        <Form onSubmit={(e) => handleSubmit(e)}>
+        <Form >
 
 
 
@@ -204,29 +284,37 @@ const renderForm = () => (
               </Form.Field>
              <Form.Group> 
             <Form.Field >
-                <Form.Input
+            
+                <Dropdown
                   
-                  placeholder="INTERÉS"
+                  placeholder='SELECCIONA UN INTERÉS'
+                  fluid                  
+                  selection
+                  search
+                  options={interesOptions()}                  
                   onChange={handleInteres}
-                />
-
+                />                        
                 <Label pointing  color='teal'>
-                  El Interés es un sustantivo que refiere al tipo de personaje que puede tener vinculación con la agenda del niñe: zombies, cumpleaños, animales, etc. 
+                  El Interés es un sustantivo que refiere al tipo de personaje que puede tener vinculación con la agenda del niñe: zombies, cumpleaños, animales, etc. Si no encontrás el tuyo, podes crear uno nuevo con el botón + 
                 </Label>
               </Form.Field>
+              <Form.Field>
+                <Button color="red" icon="plus"  onClick={() => setOpenInteres(true)}/>
+              </Form.Field>
+            
               <Form.Field required>
                 
                 <Dropdown
-                  inline
+                  
                   placeholder='SELECCIONA UNA CATEGORÍA'
-                  fluid
+                  fluid                  
                   selection
                   options={categoriasOptions}                  
                   onChange={handleCategoria}
                 />
 
                 <Label pointing  color='teal'>
-                  El Interés es un sustantivo que refiere al tipo de personaje que puede tener vinculación con la agenda del niñe: zombies, cumpleaños, animales, etc. 
+                  La categoría permite habilitar el conjunto de bloques correspondiente al tipo de actividad. 
                 </Label>
               </Form.Field>
               </Form.Group>
@@ -247,11 +335,63 @@ const renderForm = () => (
          
            <Message color="violet" hidden={msgOk} size='big' floating ><b>Felicitaciones!</b> Has creado una nueva experiencia Pasayo Bloques</Message>
         </Form>
-   
+
    
      
    
   )
+
+////////////////////////////////////////////////////////////////////////////////////
+const renderModalInteres= () => (
+    <Modal      
+      onClose={() => setOpenInteres(false)}
+      onOpen={() => setOpenInteres(true)}
+      open={openInteres}    
+     
+    >
+ <Modal.Header>
+      <Header as='h3'>
+        <Icon name='braille' />
+        <Header.Content>
+          NUEVO INTERÉS
+          <Header.Subheader>Aquí podrás crear un nuevo interés para tu experiencia.</Header.Subheader>
+        </Header.Content>
+      </Header>
+      </Modal.Header>
+      <Modal.Content>
+      
+<Form onSubmit={(e) => handleNuevoInteres(e)}>
+           <Form.Group> 
+       
+                       
+       <Form.Field>
+                 <Form.Input                   
+                  placeholder="NUEVO INTERÉS"                  
+                  onChange={handleNuevoInteres}
+                />
+
+                <Label pointing  color='teal'>
+                  Debe ser un sustantivo que funcione como una categoría de interés, por ejemplo: CUMPLEAÑO, FIESTA, ZOMBIS, VAMPIROS, etc.  
+                </Label>
+       </Form.Field>
+           
+           </Form.Group>   
+         </Form>     
+        
+      </Modal.Content>
+      <Modal.Actions>
+        <Button color='violet' onClick={() => setOpenInteres(false)}>
+          Salir
+        </Button>
+
+        
+        <Button color="purple" onClick={handleSubmitInteres} disabled={btnGuardar}>
+            GUARDAR INTERÉS
+          </Button>
+      </Modal.Actions>
+    </Modal>
+  )
+
 
 ////////////////////////////////////////////////////////////////////////////////////
 const renderModal= () => (
@@ -309,11 +449,13 @@ const renderModal= () => (
                                interes={interes} 
                                filtroUsuario={filtroUsuario}
                                filtroCategoria={filtroCategoria}
+                               cantidad = {cantidad}
                                />
 
            </Grid.Column> 
           <Grid.Column width={1}/>
           {renderModal()}
+          {renderModalInteres()}
         </Grid.Row>
       </Grid>
     )
