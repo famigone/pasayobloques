@@ -60,6 +60,27 @@ export const updateExperienciaC4 = new ValidatedMethod({
 });
 
 
+export const deleteExperienciaC4 = new ValidatedMethod({
+  name: "deleteExperienciaC4",
+  validate: new SimpleSchema({
+    //idContacto
+    id: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id
+    }
+  }).validator(),
+  run(one) {
+   return ExperienciasC4.update(
+      { _id: one.id },
+      {
+        $set: {          
+          activo: false
+        }
+      }
+    );
+  }
+});
+
 export const insertExperienciaC4 = new ValidatedMethod({
   name: "experienciaC4.insert",
   validate: new SimpleSchema({

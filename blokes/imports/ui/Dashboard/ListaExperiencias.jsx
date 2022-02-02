@@ -9,7 +9,7 @@ import { BlocklyWorkspace } from 'react-blockly';
 import Alert from "react-s-alert";
 import {experienciaArreglo} from "./experienciasArreglo"
 import Experiencias from "/imports/api/experiencias.js";
-import { insertExperiencia } from "/api/methods.js";
+import { insertExperiencia, deleteExperienciaC4 } from "/api/methods.js";
 import BotonRedirectC4 from "./BotonRedirectC4"
 import { Redirect } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
@@ -95,6 +95,33 @@ const creador = useTracker(() => Meteor.users.findOne(exp.createdBy), []);
 //console.log("suarios: "+ creador)
 
 
+
+
+function eliminarExp(laExp){
+
+   let exp =    {id: laExp._id} 
+   const id = deleteExperienciaC4.call(exp, (err, res) => {
+        if (err) {
+          console.log(err);
+        }else{
+          //inhabilito el botón de guardar 
+          //setbtnGuardar(true)
+          //muestro el ok
+          //setmsgOk(false)
+
+
+        }
+      });
+
+  }
+
+function btnEliminar (laExp) {
+  if (laExp.createdBy === Meteor.userId())
+    botonSave = <Button color="red" onClick={() => {eliminarExp(laExp)}} size="small"> Eliminar</Button>    
+  else botonSave = ""
+  return botonSave
+  }
+
 const renderCard = (unaExp) => ( 
 <Card raised>
       <Card.Content>
@@ -134,6 +161,7 @@ const renderCard = (unaExp) => (
           
           <BotonRedirectC4 experiencia={unaExp}/>
           {renderSolucion(unaExp)}
+          {btnEliminar(unaExp)}
         </div>
         <Divider/>
         <Card.Content extra>
