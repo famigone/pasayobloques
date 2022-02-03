@@ -31,6 +31,7 @@ import {
   Grid,
   Image,
   Dropdown,
+
   Modal,
   Header
 } from "semantic-ui-react";
@@ -43,6 +44,8 @@ export default function ListaExperiencias({ categoria, interes, filtroUsuario, f
 let [open, setOpen] = useState(false);  
 let [exp, setExp] = useState("");  
 let [verSolucion, setverSolucion] = useState(false);  
+let [openConfirm, setOpenConfirm] = useState(false);  
+
 ////////////////////////////////////////////////////////////////////////////////////
 const src = '/img/c4.png'
 
@@ -104,6 +107,7 @@ function eliminarExp(laExp){
         if (err) {
           console.log(err);
         }else{
+          setOpenConfirm(false)
           //inhabilito el botón de guardar 
           //setbtnGuardar(true)
           //muestro el ok
@@ -117,11 +121,11 @@ function eliminarExp(laExp){
 
 function btnEliminar (laExp) {
   if (laExp.createdBy === Meteor.userId())
-    botonSave = <Button color="red" onClick={() => {eliminarExp(laExp)}} size="small"> Eliminar</Button>    
+    botonSave = <Button color="red" onClick={() => {setOpenConfirm(true)}} size="small"> Eliminar</Button>    
   else botonSave = ""
   return botonSave
   }
-
+const handleConfirmClose = () => setOpenConfirm(false)
 const renderCard = (unaExp) => ( 
 <Card raised>
       <Card.Content>
@@ -162,6 +166,15 @@ const renderCard = (unaExp) => (
           <BotonRedirectC4 experiencia={unaExp}/>
           {renderSolucion(unaExp)}
           {btnEliminar(unaExp)}
+        <Confirm
+          open={openConfirm}
+          header='Atención!'
+          content='Vas a eliminar la experiencia.'
+          cancelButton='Mejor no'
+          confirmButton="Quiero eliminarla!"
+          onCancel={handleConfirmClose}
+          onConfirm={()=>eliminarExp(unaExp)}
+        />
         </div>
         <Divider/>
         <Card.Content extra>
@@ -240,7 +253,10 @@ function renderModal(){
 
  
  const expLoading = useTracker(() => {
- // console.log("interes interes "+ interes)
+  console.log("filtroUsuario "+filtroUsuario)
+  console.log("filtroCategoria "+filtroCategoria)
+  console.log("cantidad "+cantidad)
+  console.log("interes "+interes)
     const handle = Meteor.subscribe('experienciasC4', filtroUsuario, filtroCategoria, cantidad, interes);      
     return !handle.ready();
   });

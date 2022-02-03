@@ -239,7 +239,7 @@ const interesLoading = useTracker(() => {
 
 //////////////////////////////////////////////////////////////////////////////////
  handleNuevoInteres = (event) => {
-    setNuevoInteres(event.target.value)
+    setNuevoInteres(event.target.value)      
  };
  handleObjetivo = (event) => {  
     setObjetivo(event.target.value)
@@ -260,6 +260,7 @@ handleInteres = (event, data) => {
   setOpen(false)
   setmsgOk(true)
   setbtnGuardar(false)
+  setInteres(false)
  }
   
 
@@ -396,7 +397,7 @@ const renderModalInteres= () => (
 ////////////////////////////////////////////////////////////////////////////////////
 const renderModal= () => (
       <Modal      
-      onClose={() => setOpen(false)}
+      onClose={() => handleSalir}
       onOpen={() => setOpen(true)}
       open={open}    
       size="fullscreen"
@@ -451,7 +452,7 @@ const renderModal= () => (
                                filtroCategoria={filtroCategoria}
                                cantidad = {cantidad}
                                />
-
+                               
            </Grid.Column> 
           <Grid.Column width={1}/>
           {renderModal()}
