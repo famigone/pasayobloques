@@ -149,16 +149,16 @@ const renderCard = (unaExp) => (
       </a>
     </Card.Content>
          <Card.Content extra>
-        <div className='ui three buttons'>
+        
         <Card.Meta>
           <Label as='a' color='violet' tag>
             {unaExp.interesDescripcion()}
           </Label>          
         </Card.Meta>
-        </div>
+        
       </Card.Content>
       <Card.Content extra>
-        <div className='ui three buttons'>
+        <div className='ui four buttons'>
           <Button  color='teal' onClick={() => handleResolver(unaExp)}>
             Resolver 
           </Button>          
