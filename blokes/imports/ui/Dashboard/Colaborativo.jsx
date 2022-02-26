@@ -8,8 +8,8 @@ import {experienciaArreglo} from "./experienciasArreglo"
 import {toolbar} from "./toolbar"
 import Experiencias from "/imports/api/experiencias.js";
 import { insertExperiencia } from "/api/methods.js";
-import BotonRedirect from "./BotonRedirect"
-import BotonBack from "./BotonBack"
+import BotonCompartir from "./BotonCompartir"
+
 import { Redirect } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import LoaderExampleText from "/imports/ui/Dashboard/LoaderExampleText.js";
@@ -70,17 +70,8 @@ handleClose(){
 
   renderModal(){
     return(
-      <Modal
-      onClose={() => this.setState({openWorkspace:false})}
-      onOpen={() => this.setState({openWorkspace:true}) }
-      open={this.state.openWorkspace}
-      //trigger={<Button>Show Modal</Button>}
-      size="fullscreen"
-      closeOnEscape={false}
-      closeOnDimmerClick={false}
-      hidden={this.state.hidden}
-    >
-      <Modal.Header>
+      
+      <Segment raised>
       <Header as='h3'>
         <Icon name='bullseye' />
         <Header.Content>
@@ -88,18 +79,16 @@ handleClose(){
           <Header.Subheader>{experienciaArreglo[this.props.Experiencia.codigo].narrativa}</Header.Subheader>
         </Header.Content>
       </Header>
-      </Modal.Header>
-      <Modal.Content image>
+      
+      
 
-        <Modal.Description>
-            <MiBloqueColab  laExp={this.props.Experiencia} />
-        </Modal.Description>
-      </Modal.Content>
-      <Modal.Actions>
-        <BotonBack/>
+      
+            <MiBloqueColab  laExp={this.props.Experiencia} demo={false} />
+      
+      
         
-      </Modal.Actions>
-    </Modal>
+        </Segment>
+    
     )
   }
   

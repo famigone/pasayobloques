@@ -4,10 +4,10 @@ import PropTypes from "prop-types"; // ES6
 import { withTracker } from "meteor/react-meteor-data";
 import LoaderExampleText from "/imports/ui/Dashboard/LoaderExampleText.js";
 import Contactos from "/imports/api/contacto.js";
-import Consultas from "./consultas.jsx";
+
 import ReactDOM from "react-dom";
 import DatePicker from "react-datepicker";
-import NuevaPregunta from "./NuevaPregunta.jsx";
+
 import "react-datepicker/dist/react-datepicker.css";
 import { Accounts } from "meteor/accounts-base";
 import { AccountsCommon } from "meteor/accounts-base";

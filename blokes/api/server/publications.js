@@ -4,6 +4,7 @@ import Respuesta from "/imports/api/respuesta.js";
 import Regla from "/imports/api/regla.js";
 import Experiencias from "/imports/api/experiencias.js";
 import Interes from "/imports/api/interes.js";
+import Uso from "/imports/api/uso.js";
 import ExperienciasC4 from "/imports/api/experienciasC4.js";
 import ReglaMultiple from "/imports/api/reglaMultiple.js";
 import ReglaMultipleDetalle from "/imports/api/reglaMultipleDetalle.js";
@@ -85,6 +86,13 @@ Meteor.publish("experienciasC4", function( filtroUsuario, filtroCategoria, limit
 
 Meteor.publish("experienciasC4One", function(id) {  
   let rta = ExperienciasC4.find({_id:id});    
+  return rta
+  console.log(rta)
+});
+
+
+Meteor.publish("uso", function(id) {  
+  let rta = Uso.find({_id:id});    
   return rta
   //console.log(rta)
 });

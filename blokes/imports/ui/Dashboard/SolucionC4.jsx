@@ -1,15 +1,15 @@
 import React, { Component} from "react";
 import ReactDOM from "react-dom";
 import { Meteor } from "meteor/meteor";
-import MiBloqueColabC4 from "./MiBloqueColabC4.jsx";
+import MiBloqueC4 from "./MiBloqueC4.jsx";
 import { withTracker } from "meteor/react-meteor-data";
 import { BlocklyWorkspace } from 'react-blockly';
 import {experienciaArreglo} from "./experienciasArreglo"
 import {toolbar} from "./toolbar"
 import Experiencias from "/imports/api/experiencias.js";
 import { insertExperiencia } from "/api/methods.js";
+import BotonCompartir from "./BotonCompartir"
 
-import BotonBackC4 from "./BotonBackC4"
 import { Redirect } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 import LoaderExampleText from "/imports/ui/Dashboard/LoaderExampleText.js";
@@ -39,7 +39,7 @@ import {
 
 //const App = () => (
 
-class ColaborativoC4 extends Component {
+class SolucionC4 extends Component {
 
   constructor(props) {
     super(props);   
@@ -62,32 +62,32 @@ class ColaborativoC4 extends Component {
   }
 
 
-handleClose(){    
+handleClose(){  
+  console.log("clooooooooooose")
   this.setState({hidden:true})
-  history.push("/home");
+  history.push("/experiencia");
 }
-
-
 
   renderModal(){
     return(
-    <Segment raised>
+      
+      <Segment raised>
       <Header as='h3'>
         <Icon name='bullseye' />
         <Header.Content>
-          {this.props.laExp.narrativa}
-          <Header.Subheader>{this.props.laExp.objetivo}</Header.Subheader>
+          {this.props.Experiencia.narrativa}
+          <Header.Subheader>{this.props.Experiencia.objetivo}</Header.Subheader>
         </Header.Content>
       </Header>
-     
+      
+      
 
       
-            <MiBloqueColabC4   laExp={this.props.laExp} elUso = {this.props.elUso} demo={false}/>
+            <MiBloqueC4 laExp={this.props.Experiencia}/>
+             
       
-      
-   
         
-    </Segment>  
+        </Segment>
     
     )
   }
@@ -96,32 +96,38 @@ handleClose(){
 
 
   render() {
-    //console.log(this.props.elUso)  
-    if (this.props.isLoading ) {
+    
+    if (this.props.isLoading) {
       return <LoaderExampleText />;
-    }else{
-      //console.log("chigazo: "+this.props.laExp._id)
-      return this.renderModal();
-    }  
+    }
+    console.log(this.props.Experiencia._id)
+    return this.renderModal();
   }
 }
 
-export default withTracker(() => {   
+export default withTracker(
+  () => {   
     let { id } = useParams();  
-    const handles = [Meteor.subscribe("uso", id),];
-    const loading = handles.some(handle => !handle.ready());  
-    var loadingExp= true;
-    var laExp;
-    elUso = Uso.findOne(id)      
-    if (!loading) {
-      const handlesExp = [Meteor.subscribe("experienciasC4One", elUso.experienciaId),];
-      loadingExp = handlesExp.some(handlesExp => !handlesExp.ready());
-      laExp = ExperienciasC4.findOne(elUso.experienciaId)      
-    }  
+
+//  console.log(id)
+
+    const handles = [
+      Meteor.subscribe(
+        "experienciasC4One",
+        id
+      )
+    ];
+
+    const loading = handles.some(handle => !handle.ready());
+    
+    
+     var laExp = ExperienciasC4.findOne(id)      
+     
+    
+
     return {
-      isLoading: loadingExp,
-      laExp: laExp,
-      elUso: elUso
+      isLoading: loading,
+      Experiencia: laExp
     };
   }
-)(ColaborativoC4);
+)(SolucionC4);

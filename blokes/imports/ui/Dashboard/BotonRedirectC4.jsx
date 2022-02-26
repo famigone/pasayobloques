@@ -1,6 +1,6 @@
 import React from 'react';
 import { useHistory } from 'react-router-dom';
-
+import { insertUso } from "/api/methods.js";
 
 
 import {
@@ -26,14 +26,23 @@ import {
 const BotonRedirectC4 = ({experiencia}) => {
    const history = useHistory();
   const handleClick = () => {
-   
-    history.push("/colaborativoc4/"+experiencia._id);
+   const uso = {experienciaId: experiencia._id,
+                xml:"_"            
+    }
+    //console.log("XML "+exp.xml)
+    
+    const id = insertUso.call(uso, (err, res) => {
+        if (err) {
+          console.log(err);
+        }
+      });
+    history.push("/colaborativoc4/"+id);
   }
  return (
         <div>
             
              <Button  color='teal' onClick={handleClick}>
-            Compartir 
+            Experimentar 
           </Button>  
         </div>
     );

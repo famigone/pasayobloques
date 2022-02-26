@@ -9,12 +9,14 @@ import Alert from "react-s-alert";
 import {experienciaArreglo} from "./experienciasArreglo"
 import Experiencias from "/imports/api/experiencias.js";
 import { insertExperiencia } from "/api/methods.js";
-import BotonRedirect from "./BotonRedirect"
+import BotonCompartir from "./BotonCompartir"
+import BotonSolucion from "./BotonSolucion"
+
 import { Redirect } from "react-router-dom";
 import { useHistory } from 'react-router-dom';
 
 
-import {
+import {  
   Icon,
   Label,
   Menu,
@@ -105,7 +107,7 @@ componentDidUpdate(prevProps) {
   handleConfirm = () => {
     //creamos la experiencia 
     const exp = {codigo:this.state.experiencia,
-                  xml:"_",
+                  xml:"",
                   activo:true
     }
     //console.log("XML "+exp.xml)
@@ -146,12 +148,9 @@ componentDidUpdate(prevProps) {
   render() {
     
       return (
-         <div
-      
-      >
-     
-        <Segment.Group raised>
-        <Segment >
+         <div>     
+          <Segment.Group raised>
+          <Segment >
 
           <Message
    icon='bullseye'
@@ -182,9 +181,10 @@ componentDidUpdate(prevProps) {
         <Grid>
           <Grid.Row>
           <Grid.Column size={1}/>
-          <Button content='Resolver' icon='up arrow' labelPosition='right' color="violet" onClick={this.show}/>
-          <Button content='Solución' icon='play' labelPosition='right' color="blue" onClick={this.showDemo}/>          
-          <BotonRedirect experiencia={this.props.experiencia}/>
+
+          
+          <BotonSolucion experiencia={this.props.experiencia}/>
+          <BotonCompartir experiencia={this.props.experiencia}/>
 
           </Grid.Row>
         </Grid>  

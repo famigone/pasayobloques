@@ -3,6 +3,7 @@ import { Meteor } from "meteor/meteor";
 import "/api/methods.js";
 import "../imports/api/experiencias.js";
 import "../imports/api/interes.js";
+import "../imports/api/uso.js";
 import "../imports/api/experienciasC4.js";
 import "/api/server/publications.js";
 

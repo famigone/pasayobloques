@@ -3,6 +3,7 @@ import ReactDOM from "react-dom";
 import { Meteor } from "meteor/meteor";
 import MiBloque from "./MiBloque.jsx";
 import MiBloqueC4 from "./MiBloqueC4.jsx";
+import BotonSolucionC4 from "./BotonSolucionC4.jsx";
 import { useTracker } from 'meteor/react-meteor-data';
 import { updateLocacion } from "/api/methods.js";
 import { BlocklyWorkspace } from 'react-blockly';
@@ -71,6 +72,7 @@ function handleResolver(unaExp) {
   setExp(unaExp)  
 }  
 function handleVerSolucion(unaExp) {
+
   setExp(unaExp)
   setverSolucion(true)  
   setOpen(true)  
@@ -85,7 +87,8 @@ function handleCompartir(unaExp) {
 function renderSolucion(unaExp){
 let btn = "";
   if (!(unaExp.xml ==="_"))
-    btn=<Button  color='violet' onClick={() => handleVerSolucion(unaExp)}>Solución</Button>
+    //btn=<Button  color='violet' size = "small" onClick={() => handleVerSolucion(unaExp)}>Solución</Button>
+    btn = <BotonSolucionC4 experiencia={unaExp._id}/>  
   return (btn)
 }
 
@@ -121,7 +124,7 @@ function eliminarExp(laExp){
 
 function btnEliminar (laExp) {
   if (laExp.createdBy === Meteor.userId())
-    botonSave = <Button color="red" onClick={() => {setOpenConfirm(true)}} size="small"> Eliminar</Button>    
+    botonSave = <Button color="red" onClick={() => {setOpenConfirm(true)}} > Eliminar</Button>    
   else botonSave = ""
   return botonSave
   }
@@ -158,14 +161,14 @@ const renderCard = (unaExp) => (
         
       </Card.Content>
       <Card.Content extra>
-        <div className='ui four buttons'>
-          <Button  color='teal' onClick={() => handleResolver(unaExp)}>
-            Resolver 
-          </Button>          
+        <div className='ui three buttons'>
+          
           
           <BotonRedirectC4 experiencia={unaExp}/>
-          {renderSolucion(unaExp)}
+          
           {btnEliminar(unaExp)}
+
+          {renderSolucion(unaExp)}
         <Confirm
           open={openConfirm}
           header='Atención!'

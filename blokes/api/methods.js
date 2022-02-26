@@ -4,6 +4,7 @@ import ContactoPregunta from "/imports/api/contactoPregunta.js";
 import Experiencias from "/imports/api/experiencias.js";
 import ExperienciasC4 from "/imports/api/experienciasC4.js";
 import Respuesta from "/imports/api/respuesta.js";
+import Uso from "/imports/api/uso.js";
 import Regla from "/imports/api/regla.js";
 import ReglaMultiple from "/imports/api/reglaMultiple.js";
 import ReglaMultipleDetalle from "/imports/api/reglaMultipleDetalle.js";
@@ -58,7 +59,27 @@ export const updateExperienciaC4 = new ValidatedMethod({
     );
   }
 });
-
+export const updateUso = new ValidatedMethod({
+  name: "updateUso",
+  validate: new SimpleSchema({
+    //idContacto
+    id: {
+      type: String,
+      regEx: SimpleSchema.RegEx.Id
+    }, 
+    xml: {type:String}
+  }).validator(),
+  run(one) {
+   return Uso.update(
+      { _id: one.id },
+      {
+        $set: {          
+          xml: one.xml
+        }
+      }
+    );
+  }
+});
 
 export const deleteExperienciaC4 = new ValidatedMethod({
   name: "deleteExperienciaC4",
@@ -80,6 +101,40 @@ export const deleteExperienciaC4 = new ValidatedMethod({
     );
   }
 });
+
+export const insertUso = new ValidatedMethod({
+  name: "uso.insert",
+  validate: new SimpleSchema({
+  xml: {
+    type: String,
+    optional: true
+  },
+  experienciaId: {
+    type: String
+  },  
+  createdBy: {
+    type: String,
+    optional: true,
+    autoValue: function() {
+      return this.userId;
+    }
+  },
+  createdAt: {
+    type: Date,
+    optional: true,
+    autoValue: function() {
+      return new Date();
+    }
+  }
+  }).validator(),
+  run(one) {
+
+      one.activo = true;      
+      return Uso.insert(one);
+       
+  }
+});
+
 
 export const insertExperienciaC4 = new ValidatedMethod({
   name: "experienciaC4.insert",

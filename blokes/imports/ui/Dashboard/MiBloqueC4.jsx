@@ -8,6 +8,7 @@ import {solucion} from "./soluciones"
 import {toolbar, toolModularidad, toolRepetitivas, toolSecuencia, toolAlternativaSimple} from "./toolbar"
 import { updateExperienciaC4 } from "/api/methods.js";
 import BlocklyJS from 'blockly/javascript';
+import BotonBackC4 from './BotonBackC4'
 import LoaderExampleText from "/imports/ui/Dashboard/LoaderExampleText.js";
 
 import {
@@ -27,7 +28,7 @@ import {
   Modal,
   Header
 } from "semantic-ui-react";
-export default function MiBloqueC4({laExp, conSolucion}) {
+export default function MiBloqueC4({laExp}) {
   const [xml, setXml] = useState("");
   const [javascriptCode, setJavascriptCode] = useState("");
   const [msgOk, setmsgOk] = useState(true);
@@ -88,7 +89,7 @@ let botonSave
 //console.log("laExp.createdBy "+laExp.createdBy)
 //console.log("Meteor.userId "+Meteor.userId())
 if (laExp.createdBy === Meteor.userId())
-  botonSave = <Button color="purple" onClick={saveCode} size="small"><h4><Icon name='cloud upload' size="big"/> Guardar como Solución</h4></Button>    
+  botonSave = <Button color="purple" onClick={saveCode} size="small"><Icon name='cloud upload'/> Guardar como Solución</Button>    
 else botonSave = ""
 
 //param es el XML inicial de la experiencia. Si desde listaExperiencias presionan Solucion, entonces 
@@ -113,8 +114,6 @@ const options = {
  //   }
   
 
-  let param="" 
-  if (conSolucion) param= laExp.xml
    
   
     
@@ -130,7 +129,10 @@ const options = {
   
    </Grid.Column>    
        <Grid.Column width={4}>    
-        {botonSave}
+       <Button.Group>
+          {botonSave}
+          <BotonBackC4/>
+       </Button.Group>   
        </Grid.Column> 
    
    <Grid.Column width={10}>
@@ -150,7 +152,7 @@ const options = {
 
       <BlocklyWorkspace
         toolboxConfiguration={toolboxCategories}
-        initialXml={param}
+        initialXml={laExp.xml}
         className="fill-height"        
         workspaceConfiguration={{
           grid: {

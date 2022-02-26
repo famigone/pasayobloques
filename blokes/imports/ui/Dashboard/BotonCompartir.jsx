@@ -23,7 +23,7 @@ import {
 } from "semantic-ui-react";
 
 
-const BotonRedirect = ({experiencia}) => {
+const BotonCompartir = ({experiencia}) => {
     const history = useHistory();
 
     const handleClick = () => {
@@ -44,10 +44,9 @@ const BotonRedirect = ({experiencia}) => {
 
     return (
         <div>
-            <Button content='Compartir' icon='share' labelPosition='right' color="teal" onClick={handleClick}/>
-            
+            <Button content='Experimentar' icon='share' labelPosition='right' color="teal" onClick={handleClick}/>            
         </div>
     );
 }
 
-export default BotonRedirect;
+export default BotonCompartir;

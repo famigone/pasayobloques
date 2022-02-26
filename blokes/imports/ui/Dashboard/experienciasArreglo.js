@@ -36,3 +36,23 @@ experienciaArreglo[9] = {
         objetivo:"Desarrollar la capacidad de hacer preguntas dentro del código.",
         narrativa:"Tenemos una misión para vos. Necesitamos saber si el caballito Cococho es un unicornio o solo un caballo. Te damos una pista: si tiene un cuerno entre los ojos entonces mostramos un mensaje que diga que es un Unicornio. Si no lo tiene, mostramos un mensaje que diga que no es un Unicornio."
 }
+
+experienciaArreglo[10] = {
+        objetivo:"Dividir un problema grande en partes pequeñas.",
+        narrativa:"Hoy sos un espía secreto! Necesitamos programar un módulo que imprima este mensaje por pantalla: LA OPERACIÓN GALLETA FUE UN ÉXITO"
+}
+
+experienciaArreglo[11] = {
+        objetivo:"Dividir un problema grande en partes pequeñas.",
+        narrativa:"El Pirata Malapata tenía un cofre con 30 monedas de plata. Pero Ruth y Belen se comieron 15 monedas de chocolate! ¿Cuántas monedas quedan en el cofre? Hagámos un módulo para saberlo."
+}
+
+experienciaArreglo[12] = {
+        objetivo:"Hacer muchas veces una misma tarea.",
+        narrativa:"El Pirata Malapata está muy enojado. Hay 5 amiguitas que descubrieron su cofre de monedas de chocolate. Vamos a preguntarle a cada una de ellas, cuántas monedas se comieron."
+}
+
+experienciaArreglo[13] = {
+        objetivo:"Dividir un problema grande en partes pequeñas.",
+        narrativa:""
+}

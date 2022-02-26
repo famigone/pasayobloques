@@ -58,20 +58,21 @@ renderMenu(){return(
           <Menu.Menu>
             <Menu.Item
               name='1.1 Zombies en el parque'
-              active={this.state.activeItem === 'enterprise'}
-
+              active={this.state.experiencia === 1}
               onClick={() =>
                 this.handleItemClick(1)
               }
             />
             <Menu.Item
               name='1.2 Zombies en el parque - Operando'                          
+              active={this.state.experiencia === 2}
               onClick={() =>                
                 this.handleItemClick(2)
               }
             />
                <Menu.Item
               name='1.3 El extraño caso de las manzanas'                          
+              active={this.state.experiencia === 5}
               onClick={() =>                
                 this.handleItemClick(5)
               }
@@ -86,7 +87,8 @@ renderMenu(){return(
 
           <Menu.Menu>
            <Menu.Item
-              name='2.1 Ataque marciano! '                          
+              name='2.1 Ataque marciano! '        
+              active={this.state.experiencia === 3}                  
               onClick={() =>                
                 this.handleItemClick(3)
               }
@@ -94,12 +96,14 @@ renderMenu(){return(
             
             <Menu.Item
               name='2.2 La fiesta de cumpleaños'                          
+              active={this.state.experiencia === 4}
               onClick={() =>                
                 this.handleItemClick(4)
               }
             />
             <Menu.Item
               name='2.3 El inspector de Unicornios'                          
+              active={this.state.experiencia === 6}
               onClick={() =>                
                 this.handleItemClick(6)
               }
@@ -114,20 +118,23 @@ renderMenu(){return(
 
           <Menu.Menu>
           <Menu.Item
-              name='3.1 Ataque marciano! '                          
+              name='3.1 La fiesta de cumpleaños'  
+              active={this.state.experiencia === 7}                        
               onClick={() =>                
                 this.handleItemClick(7)
               }
             />
             
             <Menu.Item
-              name='3.2 La fiesta de cumpleaños'                          
+              name='3.2  Ataque marciano!'         
+              active={this.state.experiencia === 8}                 
               onClick={() =>                
                 this.handleItemClick(8)
               }
             />
             <Menu.Item
               name='3.3 El inspector de Unicornios'                          
+              active={this.state.experiencia === 9}
               onClick={() =>                
                 this.handleItemClick(9)
               }
@@ -135,43 +142,39 @@ renderMenu(){return(
           </Menu.Menu>
         </Menu.Item>
         <Menu.Item>
-          <Menu.Header>ALTERNATIVA SIMPLE</Menu.Header>
+          <Menu.Header>MODULOS</Menu.Header>
 
           <Menu.Menu>
             <Menu.Item
-              name='shared'
-              active={this.state.activeItem === 'shared'}
-              onClick={this.handleItemClick}
+              name='4.1 El mensaje secreto'
+              active={this.state.experiencia === 10}
+              onClick={() =>                
+                this.handleItemClick(10)}
             />
-            <Menu.Item
-              name='dedicated'
-              active={this.state.activeItem === 'dedicated'}
-              onClick={this.handleItemClick}
+                        <Menu.Item
+              name='4.2 Las monedas de chocolate'
+              active={this.state.experiencia === 11}
+              onClick={() =>                
+                this.handleItemClick(11)}
             />
+         
           </Menu.Menu>
         </Menu.Item>
-
-        <Menu.Item>
-          <Menu.Header>Support</Menu.Header>
+<Menu.Item>
+          <Menu.Header>REPETITIVAS</Menu.Header>
 
           <Menu.Menu>
             <Menu.Item
-              name='email'
-              active={this.state.activeItem === 'email'}
-              onClick={this.handleItemClick}
-            >
-              E-mail Support
-            </Menu.Item>
-
-            <Menu.Item
-              name='faq'
-              active={this.state.activeItem === 'faq'}
-              onClick={this.handleItemClick}
-            >
-              FAQs
-            </Menu.Item>
+              name='5.1 El mensaje secreto'
+              active={this.state.experiencia === 10}
+              onClick={() =>                
+                this.handleItemClick(10)}
+            />
+                    
+         
           </Menu.Menu>
         </Menu.Item>
+       
       </Menu>
 )}
 

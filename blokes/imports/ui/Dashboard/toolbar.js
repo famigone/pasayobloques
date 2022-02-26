@@ -31,6 +31,10 @@ export const toolSecuencia = {
               kind: "block",
               type: "text_print",              
             },
+            {
+              type: 'text_prompt',
+              kind: "block",          
+          }, 
           ]
         },        
 
@@ -270,7 +274,7 @@ export const toolModularidad = {
             {
               kind: "block",
               type: "text_print",              
-            },
+            },          
           ]
         },        
 
@@ -597,3 +601,6 @@ toolbar[7]= toolAlternativaSimple
 toolbar[8]= toolAlternativaSimple
 toolbar[9]= toolAlternativaSimple
 toolbar[10]= toolModularidad
+toolbar[11]= toolModularidad
+toolbar[12]= toolModularidad
+toolbar[13]= toolModularidad

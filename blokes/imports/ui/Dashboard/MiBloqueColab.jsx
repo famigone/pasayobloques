@@ -10,6 +10,8 @@ import BlocklyJS from 'blockly/javascript';
 import LoaderExampleText from "/imports/ui/Dashboard/LoaderExampleText.js";
 import { updateExperiencia } from "/api/methods.js";
 import Experiencias from "/imports/api/experiencias.js";
+import BotonBack from "./BotonBack"
+
 import {
   Icon,
   Label,
@@ -117,7 +119,7 @@ function handleGuardar() {
   
 }  
   return (    
-    <><p>
+    <><div>
   
   <Grid> 
 
@@ -127,7 +129,7 @@ function handleGuardar() {
          <Message icon floating >
         <Icon name='circle notched' loading color='violet'/>
         <Message.Content>
-
+        <Button.Group>
           <Button color="violet"  onClick={() => {handleCopy()}} icon='copy'>
             <Icon name="copy" /> Copiar el link
           </Button>                          
@@ -136,8 +138,8 @@ function handleGuardar() {
           
           <Button color="blue"  onClick={handleGuardar} ><Icon name="upload"/>Guardar</Button>
           <Button color="teal" onClick={() => window.location.reload(false)}><Icon name="refresh" /> Actualizar</Button>
-          
-          
+          <BotonBack/>
+         </Button.Group> 
         </Message.Content>
       </Message>
        <Message
@@ -174,7 +176,7 @@ function handleGuardar() {
    <Grid.Row/>
   </Grid> 
   
-  </p>
+  </div>
 
       <BlocklyWorkspace
         toolboxConfiguration={toolboxCategories}

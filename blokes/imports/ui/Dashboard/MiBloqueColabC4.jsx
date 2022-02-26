@@ -5,11 +5,12 @@ import { useTracker } from 'meteor/react-meteor-data';
 import { BlocklyWorkspace } from "react-blockly";
 import Blockly from "blockly";
 import {solucion} from "./soluciones"
-
+import BotonBackC4 from "./BotonBackC4"
 import BlocklyJS from 'blockly/javascript';
 import LoaderExampleText from "/imports/ui/Dashboard/LoaderExampleText.js";
-import { updateExperienciaC4 } from "/api/methods.js";
+import { updateExperienciaC4, updateUso } from "/api/methods.js";
 import ExperienciasC4 from "/imports/api/experienciasC4.js";
+import Uso from "/imports/api/uso.js";
 import {toolbar, toolModularidad, toolRepetitivas, toolSecuencia, toolAlternativaSimple} from "./toolbar"
 import {
   Icon,
@@ -29,7 +30,7 @@ import {
   Modal,
   Header
 } from "semantic-ui-react";
-export default function MiBloqueColabC4({laExp}) {
+export default function MiBloqueColabC4({laExp, elUso, demo}) {
   //const experiencia = useTracker(() => Experiencias.findOne(laExp._id));  
   //console.log("experiencia experiencia "+experiencia._id)
   //let [xml, setXml] = useState(experiencia.xml);  
@@ -45,9 +46,6 @@ export default function MiBloqueColabC4({laExp}) {
   
 
   //////////////////////////////////////////////////////////////////////////////////
-useEffect(() => {
-   console.log('useEffect se lanza solo cuando el componente se monta'); 
-}, [xml])
 
 
 function refreshPage() {
@@ -66,15 +64,8 @@ function refreshPage() {
 
 
   function workspaceDidChange(workspace) {
-  //  console.log(xml)
-    //aca hay que actualizar la experiencia    
     const exp = {id: laExp._id, xml: xml}
     setXml(xml)
-    // updateExperiencia.call(exp, (err, res) => {
-    //    if (err) {
-    //      console.log(err);
-    //    }
-    //  });
     const code = Blockly.JavaScript.workspaceToCode(workspace);
     setJavascriptCode(code);
   }
@@ -115,7 +106,7 @@ function handleCopy() {
   setTimeout(apagarMsg, 5000)
 }  
 
-function handleGuardar() {  
+function handleGuardarSolucion() {  
   const exp = {id: laExp._id, xml: xml}    
      updateExperienciaC4.call(exp, (err, res) => {
         if (err) {
@@ -129,21 +120,28 @@ function handleGuardar() {
   
 }  
 
-
-
-const expLoading = useTracker(() => {
-    const handle = Meteor.subscribe('experienciasC4One', laExp._id);
-    return !handle.ready();
-  });
-    const laExpTrack = useTracker(() =>  ExperienciasC4.findOne(laExp._id));
-   
+function handleGuardar() {  
+  const exp = {id: elUso._id, xml: xml}    
+     updateUso.call(exp, (err, res) => {
+        if (err) {
+          console.log(err);
+        }else{
+        setmsgGuardado(false)
+          
+        setTimeout(apagarMsg, 5000)        
+        }
+      });
   
-  if (expLoading) {
-      return <LoaderExampleText />;
-    }else{
+}  
 
-  //console.log(laExpTrack.xml)
-  initialXml= laExpTrack.xml; 
+///////////////////////////////////////////////////////////////
+
+  
+    initialXml= elUso.xml; 
+///////////////////////////////////////////////////////////////
+if (laExp.createdBy === Meteor.userId())
+  botonSave = <Button color="purple" onClick={handleGuardarSolucion} size="small"><Icon name='cloud upload'/> Guardar como Solución</Button>    
+else botonSave = ""
   return (    
     <><p>
   
@@ -155,17 +153,19 @@ const expLoading = useTracker(() => {
          <Message icon floating >
         <Icon name='circle notched' loading color='violet'/>
         <Message.Content>
-
+          <Button.Group>         
           <Button color="violet"  onClick={() => {handleCopy()}} icon='copy'>
             <Icon name="copy" /> Copiar el link
           </Button>                          
           <Button color="purple"  onClick={runCode} ><Icon name="play"/>Ejecutar</Button>
           
           
+          
+          {botonSave}
           <Button color="blue"  onClick={handleGuardar} ><Icon name="upload"/>Guardar</Button>
           <Button color="teal" onClick={() => window.location.reload(false)}><Icon name="refresh" /> Actualizar</Button>
-          
-          
+          <BotonBackC4/>
+         </Button.Group>  
         </Message.Content>
       </Message>
        <Message
@@ -206,7 +206,7 @@ const expLoading = useTracker(() => {
 
       <BlocklyWorkspace
         toolboxConfiguration={toolboxCategories}
-        initialXml={laExpTrack.xml}
+        initialXml={initialXml}
         className="fill-height"        
         workspaceConfiguration={{
           grid: {
@@ -222,7 +222,7 @@ const expLoading = useTracker(() => {
       />
   
     </>
-  )}
+  )
  
     
 }

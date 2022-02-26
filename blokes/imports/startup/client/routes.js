@@ -22,27 +22,18 @@ import LoginForm from "../../ui/Dashboard/LoginForm.jsx";
 
 import PrivateRoute from "./PrivateRoute.jsx";
 ////////////////////////////////
-import Tangible from "../../ui/Dashboard/Tangible.jsx";
-import Bloques from "../../ui/Dashboard/Bloques.jsx";
-import Texto from "../../ui/Dashboard/Texto.jsx";
-import MonoSelector from "../../ui/Dashboard/MonoSelector.jsx";
-import NuevoContacto from "../../ui/Dashboard/NuevoContacto.jsx";
-import ListadoConsultas from "../../ui/Dashboard/listadoConsultas.jsx";
-import NuevoContactoMujer from "../../ui/Dashboard/NuevoContactoMujer.jsx";
 
-import ReglasHome from "../../ui/Dashboard/ReglasHome.jsx";
-import ReglasMultiplesHome from "../../ui/Dashboard/ReglasMultiplesHome.jsx";
+import MonoSelector from "../../ui/Dashboard/MonoSelector.jsx";
+
 
 import AbmUsuarios from "../../ui/Dashboard/abmUsuarios.jsx";
 import Experiencia from "../../ui/Dashboard/experiencia.jsx";
+import Solucion from "../../ui/Dashboard/Solucion.jsx";
+import SolucionC4 from "../../ui/Dashboard/SolucionC4.jsx";
 import {Register} from "../../ui/Dashboard/Register.jsx";
 import Colaborativo from "../../ui/Dashboard/Colaborativo.jsx";
 import ColaborativoC4 from "../../ui/Dashboard/ColaborativoC4.jsx";
 import Home from "../../ui/Dashboard/Home.jsx";
-import NuevaPregunta from "../../ui/Dashboard/NuevaPregunta.jsx";
-import Analisis from "../../ui/Dashboard/Analisis.jsx";
-import Descargar from "../../ui/Dashboard/Descargar.jsx";
-import CabeceraFuncional from "../../ui/Dashboard/cabecerafuncional.js";
 ////////////////////////////////
 const browserHistory = createBrowserHistory();
 export const requireAuth = (nextState, replace) => {
@@ -68,34 +59,17 @@ export const Ruteador = () => (
       <Route exact path="/register" component={Register} />
         <Route exact path="/experiencia" component={MonoSelector}/>
         <Route exact path="/colaborativo/:id" component={Colaborativo}/>        
+        <Route exact path="/solucion/:id" component={Solucion}/>                
+        <Route exact path="/solucionc4/:id" component={SolucionC4}/>        
         <Route exact path="/colaborativoc4/:id" component={ColaborativoC4}/>
 
       <PrivateRoute>
         <App>
           
-          <Route exact path="/bloques/" component={Bloques} />
-          <Route exact path="/texto/" component={Texto} />
-          <Route exact path="/selector/" component={ListadoConsultas} />
           <Route exact path="/home/" component={Home} />
+                    
 
-          <Route exact path="/nuevapregunta/:id" children={<NuevaPregunta />} />
-          <Route exact path="/nuevapregunta" component={NuevaPregunta} />
-          <Route exact path="/analisis" component={Analisis} />
-          <Route exact path="/descargar" component={Descargar} />
-          <Route exact path="/usuarios" component={AbmUsuarios} />
           
-
-          <Route
-            exact
-            path="/cabecerafuncional"
-            component={CabeceraFuncional}
-          />
-          <Route exact path="/reglas" component={ReglasHome} />
-          <Route
-            exact
-            path="/reglasmultiples"
-            component={ReglasMultiplesHome}
-          />
         </App>
       </PrivateRoute>
       {requireAuth ? <Redirect to="/login" /> : <App />}
