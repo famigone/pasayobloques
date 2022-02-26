@@ -117,7 +117,7 @@ function renderSelector(){
               <Icon name="plus"/>NUEVA EXPERIENCIA
             </Button>
 
-            <Button color="violet" type="submit"   onClick={() => setCantidad(cantidad + CONST_PAGINA)}>
+            <Button color="purple" type="submit"   onClick={() => setCantidad(cantidad + CONST_PAGINA)}>
               <Icon name="retweet"/>CARGAR MÁS
             </Button> 
 

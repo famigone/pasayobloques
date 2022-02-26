@@ -39,7 +39,7 @@ export default function MiBloqueColabC4({laExp, elUso, demo}) {
   let [msgEjecutado, setmsgEjecutado] = useState(true);
   let [msgGuardado, setmsgGuardado] = useState(true);
   const [javascriptCode, setJavascriptCode] = useState("");
-  const link = "http://localhost:3000/colaborativoc4/"+laExp._id
+  const link = "http://localhost:3000/colaborativoc4/"+elUso._id
   
   //const initialXml = demo
   

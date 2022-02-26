@@ -33,8 +33,7 @@ const BotonSolucionC4 = ({experiencia}) => {
 
     return (
         
-            <Button content='Ver' icon='play' labelPosition='right' color="blue" onClick={handleClick}/>            
-        
+            <Button content='Ver' icon='play' labelPosition='right' color="teal" onClick={handleClick}/>                        
     );
 }
 

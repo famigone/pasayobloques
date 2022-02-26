@@ -41,9 +41,8 @@ const BotonRedirectC4 = ({experiencia}) => {
  return (
         <div>
             
-             <Button  color='teal' onClick={handleClick}>
-            Experimentar 
-          </Button>  
+             <Button  content='Experimentar' labelPosition='right' color='teal' icon='gamepad' onClick={handleClick}/>          
+          
         </div>
     );
 }

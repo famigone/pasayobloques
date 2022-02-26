@@ -124,7 +124,9 @@ function eliminarExp(laExp){
 
 function btnEliminar (laExp) {
   if (laExp.createdBy === Meteor.userId())
-    botonSave = <Button color="red" onClick={() => {setOpenConfirm(true)}} > Eliminar</Button>    
+    botonSave = <Button content='Borrar' icon='erase' labelPosition='right' color="teal" onClick={() => {setOpenConfirm(true)}}/> 
+  
+    
   else botonSave = ""
   return botonSave
   }
@@ -163,12 +165,11 @@ const renderCard = (unaExp) => (
       <Card.Content extra>
         <div className='ui three buttons'>
           
-          
-          <BotonRedirectC4 experiencia={unaExp}/>
-          
-          {btnEliminar(unaExp)}
-
-          {renderSolucion(unaExp)}
+          <Button.Group fluid>
+              <BotonRedirectC4 experiencia={unaExp}/>            
+              {btnEliminar(unaExp)}
+              {renderSolucion(unaExp)}
+          </Button.Group>
         <Confirm
           open={openConfirm}
           header='Atención!'

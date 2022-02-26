@@ -44,7 +44,7 @@ const BotonSolucion = ({experiencia}) => {
 
     return (
         <div>
-            <Button content='Solucion' icon='play' labelPosition='right' color="blue" onClick={handleClick}/>            
+            <Button content='Solucion' icon='play' labelPosition='right' color="teal" onClick={handleClick}/>            
         </div>
     );
 }
