@@ -131,7 +131,12 @@ export const toolAlternativaSimple = {
             {
               kind: "block",
               type: "text_print",              
-            },
+            }
+            ,
+            {
+              type: 'text_prompt',
+              kind: "block",          
+          }, 
           ]
         },        
 
@@ -274,7 +279,12 @@ export const toolModularidad = {
             {
               kind: "block",
               type: "text_print",              
-            },          
+            },    
+
+            {
+              type: 'text_prompt',
+              kind: "block",          
+          },       
           ]
         },        
 
@@ -451,6 +461,10 @@ export const toolRepetitivas = {
               kind: "block",
               type: "text_print",              
             },
+            {
+              type: 'text_prompt',
+              kind: "block",          
+          }, 
           ]
         },        
 
