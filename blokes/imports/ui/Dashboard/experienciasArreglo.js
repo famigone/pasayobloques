@@ -44,15 +44,10 @@ experienciaArreglo[10] = {
 
 experienciaArreglo[11] = {
         objetivo:"Dividir un problema grande en partes pequeñas.",
-        narrativa:"El Pirata Malapata tenía un cofre con 30 monedas de plata. Pero Ruth y Belen se comieron 15 monedas de chocolate! ¿Cuántas monedas quedan en el cofre? Hagámos un módulo para saberlo."
+        narrativa:"El Pirata Malapata tenía un cofre con 30 monedas de plata. Pero Ruth y Belen se comieron 5 monedas de chocolate cada una! ¿Cuántas monedas quedan en el cofre? Hagámos un módulo para saberlo."
 }
 
 experienciaArreglo[12] = {
-        objetivo:"Hacer muchas veces una misma tarea.",
-        narrativa:"El Pirata Malapata está muy enojado. Hay 5 amiguitas que descubrieron su cofre de monedas de chocolate. Vamos a preguntarle a cada una de ellas, cuántas monedas se comieron."
-}
-
-experienciaArreglo[13] = {
         objetivo:"Dividir un problema grande en partes pequeñas.",
-        narrativa:""
+        narrativa:"Se terminó el cumpleaños de María! Ahora, queremos saber cuántas porciones en total se comieron los 5 amiguitos que asistieron. Vamos a hacer un módulo que le pregunte a cada nene y nena cuántas porciones se comieron y las sumaremos en un acumulador."
 }

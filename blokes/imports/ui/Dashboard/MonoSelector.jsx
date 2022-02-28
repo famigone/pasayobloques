@@ -165,10 +165,10 @@ renderMenu(){return(
 
           <Menu.Menu>
             <Menu.Item
-              name='5.1 El mensaje secreto'
-              active={this.state.experiencia === 10}
+              name='5.1 Contando las porciones de torta'
+              active={this.state.experiencia === 12}
               onClick={() =>                
-                this.handleItemClick(10)}
+                this.handleItemClick(12)}
             />
                     
          
