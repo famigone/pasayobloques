@@ -31,19 +31,19 @@ import {
   Header
 } from "semantic-ui-react";
 export default function MiBloqueColabC4({laExp, elUso, demo}) {
-  //const experiencia = useTracker(() => Experiencias.findOne(laExp._id));  
+  //const experiencia = useTracker(() => Experiencias.findOne(laExp._id));
   //console.log("experiencia experiencia "+experiencia._id)
-  //let [xml, setXml] = useState(experiencia.xml);  
+  //let [xml, setXml] = useState(experiencia.xml);
   let [xml, setXml] = useState(laExp.xml);
   let [msgCopiado, setmsgCopiado] = useState(true);
   let [msgEjecutado, setmsgEjecutado] = useState(true);
   let [msgGuardado, setmsgGuardado] = useState(true);
   const [javascriptCode, setJavascriptCode] = useState("");
-  const link = "http://localhost:3000/colaborativoc4/"+elUso._id
+  const link = "https://pasayo.fi.uncoma.edu.ar/colaborativoc4/"+elUso._id
   
   //const initialXml = demo
-  
-  
+
+
 
   //////////////////////////////////////////////////////////////////////////////////
 
@@ -53,13 +53,13 @@ function refreshPage() {
   }
   const toolboxCategories = codigo(laExp.experiencia)
    // console.log(laExp.experiencia)
-  function codigo(){    
+  function codigo(){
     var rta=0
     if (laExp.categoria === "Secuencias") rta = toolSecuencia
-    else if (laExp.categoria === "Alternativa") rta = toolAlternativaSimple  
-    else if (laExp.categoria === "Repetitiva") rta = toolRepetitivas  
-    else if (laExp.categoria === "Modularidad") rta = toolModularidad    
-    return rta;  
+    else if (laExp.categoria === "Alternativa") rta = toolAlternativaSimple
+    else if (laExp.categoria === "Repetitiva") rta = toolRepetitivas
+    else if (laExp.categoria === "Modularidad") rta = toolModularidad
+    return rta;
   }
 
 
@@ -70,7 +70,7 @@ function refreshPage() {
     setJavascriptCode(code);
   }
 
-   function inyectar() {  
+   function inyectar() {
     //aca hay que actualizar la experiencia
     const exp = {id: laExp._id, xml: xml}
     setXml(xml)
@@ -78,12 +78,12 @@ function refreshPage() {
         if (err) {
           console.log(err);
         }
-      });    
+      });
   }
  function runCode() {
       console.log(javascriptCode)
       // Generate JavaScript code and run it.
-      
+
       try {
         eval(javascriptCode);
         setmsgEjecutado(false)
@@ -91,7 +91,7 @@ function refreshPage() {
       } catch (e) {
         alert(e);
       }
-    } 
+    }
 
 function apagarMsg() {
   setmsgCopiado(true)
@@ -104,72 +104,72 @@ function handleCopy() {
   navigator.clipboard.writeText(link)
   setmsgCopiado(false)
   setTimeout(apagarMsg, 5000)
-}  
+}
 
-function handleGuardarSolucion() {  
-  const exp = {id: laExp._id, xml: xml}    
+function handleGuardarSolucion() {
+  const exp = {id: laExp._id, xml: xml}
      updateExperienciaC4.call(exp, (err, res) => {
         if (err) {
           console.log(err);
         }else{
         setmsgGuardado(false)
-          
-        setTimeout(apagarMsg, 5000)        
+
+        setTimeout(apagarMsg, 5000)
         }
       });
-  
-}  
 
-function handleGuardar() {  
-  const exp = {id: elUso._id, xml: xml}    
+}
+
+function handleGuardar() {
+  const exp = {id: elUso._id, xml: xml}
      updateUso.call(exp, (err, res) => {
         if (err) {
           console.log(err);
         }else{
         setmsgGuardado(false)
-          
-        setTimeout(apagarMsg, 5000)        
+
+        setTimeout(apagarMsg, 5000)
         }
       });
-  
-}  
+
+}
 
 ///////////////////////////////////////////////////////////////
 
-  
-    initialXml= elUso.xml; 
+
+    initialXml= elUso.xml;
 ///////////////////////////////////////////////////////////////
 if (laExp.createdBy === Meteor.userId())
-  botonSave = <Button color="purple" onClick={handleGuardarSolucion} size="small"><Icon name='cloud upload'/> Guardar como Solución</Button>    
+  botonSave = <Button color="purple" onClick={handleGuardarSolucion} size="small"><Icon name='cloud upload'/> Guardar como Solución</Button>
 else botonSave = ""
-  return (    
+  return (
     <><p>
-  
-  <Grid> 
 
-   
+  <Grid>
+
+
    <Grid.Column width={16}>
 
          <Message icon floating >
         <Icon name='circle notched' loading color='violet'/>
         <Message.Content>
-          <Button.Group>         
+          <Button.Group>
           <Button color="violet"  onClick={() => {handleCopy()}} icon='copy'>
             <Icon name="copy" /> Copiar el link
-          </Button>                          
+          </Button>
           <Button color="purple"  onClick={runCode} ><Icon name="play"/>Ejecutar</Button>
-          
-          
-          
+
+
+
           {botonSave}
           <Button color="blue"  onClick={handleGuardar} ><Icon name="upload"/>Guardar</Button>
           <Button color="teal" onClick={() => window.location.reload(false)}><Icon name="refresh" /> Actualizar</Button>
           <BotonBackC4/>
-         </Button.Group>  
+         </Button.Group>
         </Message.Content>
       </Message>
        <Message
-        negative      
+        negative
         hidden= {msgCopiado}
         compact
         size='large'
@@ -178,7 +178,7 @@ else botonSave = ""
         icon= "paperclip"
       />
        <Message
-        negative      
+        negative
         hidden= {msgEjecutado}
         compact
         size='large'
@@ -187,27 +187,27 @@ else botonSave = ""
         icon= "play"
       />
        <Message
-        negative      
+        negative
         hidden= {msgGuardado}
         compact
         size='large'
         color= "violet"
         content= <Message.Header>Hemos guardado tu código.</Message.Header>
         icon= "upload"
-      />     
-            
+      />
+
 
    </Grid.Column>
-      
+
    <Grid.Row/>
-  </Grid> 
-  
+  </Grid>
+
   </p>
 
       <BlocklyWorkspace
         toolboxConfiguration={toolboxCategories}
         initialXml={initialXml}
-        className="fill-height"        
+        className="fill-height"
         workspaceConfiguration={{
           grid: {
             spacing: 20,
@@ -220,9 +220,9 @@ else botonSave = ""
         onXmlChange={setXml}
         //onInject={inyectar}
       />
-  
+
     </>
   )
- 
-    
+
+
 }
