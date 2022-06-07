@@ -1,8 +1,8 @@
-import Blockly from 'node-blockly/browser'; 
+import Blockly from 'node-blockly/browser';
 import BlocklyDrawer, { Block, Category, Shadow, Field, Value } from 'react-blockly-drawer';
 import React from 'react';
 
-const ToolbarSecuencial = () => {   
+const ToolbarSecuencial = () => {
     return (
 
  <BlocklyDrawer
@@ -18,11 +18,11 @@ const ToolbarSecuencial = () => {
         <Block type="text_print"/>
         <Block type="math_number" />
         <Block type="text"/>
-        <Block type="text_prompt_ext"/>                      
-      </Category>         
+        <Block type="text_prompt_ext"/>
+      </Category>
     </BlocklyDrawer>
-      
- 
+
+
     );
 }
 
