@@ -25,32 +25,36 @@ export const toolSecuencia = {
                 'text_quotes',
                 'parent_tooltip_when_inline',
               ],
-          }, 
-          
+          },
+
             {
               kind: "block",
-              type: "text_print",              
+              type: "text_print",
             },
             {
               type: 'text_prompt',
-              kind: "block",          
-          }, 
+              kind: "block",
+          },
           ]
-        },        
+        },
 
         {
           kind: "category",
           name: "Numeros",
           colour: "#AF7AC5",
           contents: [
-            
+
             {
               kind: "block",
               type: "math_number",
             },
+            {
+              kind: "block",
+              type: "math_arithmetic",
+            },
           ],
         },
-        
+
         {
           kind: "category",
           name: "Variable",
@@ -126,33 +130,38 @@ export const toolAlternativaSimple = {
                 'text_quotes',
                 'parent_tooltip_when_inline',
               ],
-          }, 
-          
+          },
+
             {
               kind: "block",
-              type: "text_print",              
+              type: "text_print",
             }
             ,
             {
               type: 'text_prompt',
-              kind: "block",          
-          }, 
+              kind: "block",
+          },
           ]
-        },        
+        },
 
         {
           kind: "category",
           name: "Numeros",
           colour: "#AF7AC5",
           contents: [
-            
+
             {
               kind: "block",
               type: "math_number",
             },
+            {
+              kind: "block",
+              type: "math_arithmetic",
+            },
+
           ],
         },
-        
+
         {
           kind: "category",
           name: "Variable",
@@ -198,7 +207,7 @@ export const toolAlternativaSimple = {
             }
           ],
         },
- 
+
            {
       "kind": "category",
       "name": "Control",
@@ -229,22 +238,26 @@ export const toolAlternativaSimple = {
         }
       ]
     }
-         ,        
+         ,
 
         {
           kind: "category",
           name: "Numeros",
           colour: "#AF7AC5",
           contents: [
-            
+
             {
               kind: "block",
               type: "math_number",
             },
+            {
+              kind: "block",
+              type: "math_arithmetic",
+            },
           ],
         },
-        
-        
+
+
       ],
     }
 
@@ -274,29 +287,32 @@ export const toolModularidad = {
                 'text_quotes',
                 'parent_tooltip_when_inline',
               ],
-          }, 
-          
+          },
+
             {
               kind: "block",
-              type: "text_print",              
-            },    
+              type: "text_print",
+            },
 
             {
               type: 'text_prompt',
-              kind: "block",          
-          },       
+              kind: "block",
+          },
           ]
-        },        
+        },
 
         {
           kind: "category",
           name: "Numeros",
           colour: "#AF7AC5",
           contents: [
-            
+
             {
               kind: "block",
               type: "math_number",
+            },{
+              kind: "block",
+              type: "math_arithmetic",
             },
           ],
         },
@@ -305,7 +321,7 @@ export const toolModularidad = {
           name: "Repetitivas",
           colour: "#AF7AC5",
           contents: [
-            
+
             {
             "kind": "block",
             "type": "controls_whileUntil"
@@ -313,19 +329,19 @@ export const toolModularidad = {
         {
             "kind": "block",
             "type": "controls_repeat"
-        },  
+        },
         {
             "kind": "block",
             "type": "controls_whileUntil"
-        },  
+        },
         {
             "kind": "block",
             "type": "controls_for"
-        },  
+        },
         {
             "kind": "block",
             "type": "controls_flow_statements"
-        },  
+        },
           ],
         },
         {
@@ -373,7 +389,7 @@ export const toolModularidad = {
             }
           ],
         },
- 
+
            {
       "kind": "category",
       "name": "Control",
@@ -404,21 +420,25 @@ export const toolModularidad = {
         }
       ]
     }
-         ,        
+         ,
 
         {
           kind: "category",
           name: "Numeros",
           colour: "#AF7AC5",
           contents: [
-            
+
             {
               kind: "block",
               type: "math_number",
             },
+            {
+              kind: "block",
+              type: "math_arithmetic",
+            },
           ],
         },
-                
+
 
         {
   "kind": "category",
@@ -426,7 +446,7 @@ export const toolModularidad = {
   "name": "Módulos",
   "custom": "PROCEDURE"
 }
-        
+
       ],
     }
 
@@ -455,29 +475,34 @@ export const toolRepetitivas = {
                 'text_quotes',
                 'parent_tooltip_when_inline',
               ],
-          }, 
-          
+          },
+
             {
               kind: "block",
-              type: "text_print",              
+              type: "text_print",
             },
             {
               type: 'text_prompt',
-              kind: "block",          
-          }, 
+              kind: "block",
+          },
           ]
-        },        
+        },
 
         {
           kind: "category",
           name: "Numeros",
           colour: "#AF7AC5",
           contents: [
-            
+
             {
               kind: "block",
               type: "math_number",
             },
+            {
+              kind: "block",
+              type: "math_arithmetic",
+            },
+
           ],
         },
          {
@@ -485,7 +510,7 @@ export const toolRepetitivas = {
           name: "Repetitivas",
           colour: "#AF7AC5",
           contents: [
-            
+
             {
             "kind": "block",
             "type": "controls_whileUntil"
@@ -493,19 +518,19 @@ export const toolRepetitivas = {
         {
             "kind": "block",
             "type": "controls_repeat"
-        },  
+        },
         {
             "kind": "block",
             "type": "controls_whileUntil"
-        },  
+        },
         {
             "kind": "block",
             "type": "controls_for"
-        },  
+        },
         {
             "kind": "block",
             "type": "controls_flow_statements"
-        },  
+        },
           ],
         },
         {
@@ -553,7 +578,7 @@ export const toolRepetitivas = {
             }
           ],
         },
- 
+
            {
       "kind": "category",
       "name": "Control",
@@ -584,22 +609,26 @@ export const toolRepetitivas = {
         }
       ]
     }
-         ,        
+         ,
 
         {
           kind: "category",
           name: "Numeros",
           colour: "#AF7AC5",
           contents: [
-            
+
             {
               kind: "block",
               type: "math_number",
             },
+            {
+              kind: "block",
+              type: "math_arithmetic",
+            },
           ],
         },
-        
-        
+
+
       ],
     }
 
