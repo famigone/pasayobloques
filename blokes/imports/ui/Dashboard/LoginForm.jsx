@@ -102,6 +102,7 @@ export default class LoginForm extends Component {
                 
               
               </Segment>
+              <Message hidden={!(this.state.hasError)} color="red">Usuario o contraseña incorrectos!</Message>
               <div>
                 <Link to="/register">
                   <Button color="violet" fluid size="large">
@@ -117,6 +118,7 @@ export default class LoginForm extends Component {
                </div>
 
             </Form>
+            
             <Message color="purple">PASAYO BLOQUES es una plataforma comunitaria para aprender programación para niñas y niños en el espectro austa. Para solicitar usuario escribir a <b>C4@FI.UNCOMA.EDU.AR</b></Message>
           </Grid.Column>
         </Grid.Row>
