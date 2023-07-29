@@ -96,7 +96,7 @@ function renderSelector(){
                 
                 <Dropdown
                   
-                  placeholder='INTERÉS'
+                  placeholder='TRAYECTO'
                   clearable
                   selection
                   search
@@ -288,7 +288,7 @@ const renderForm = () => (
             
                 <Dropdown
                   
-                  placeholder='SELECCIONA UN INTERÉS'
+                  placeholder='SELECCIONA UN TRAYECTO'
                   fluid                  
                   selection
                   search
@@ -296,7 +296,7 @@ const renderForm = () => (
                   onChange={handleInteres}
                 />                        
                 <Label pointing  color='teal'>
-                  El Interés es un sustantivo que refiere al tipo de personaje que puede tener vinculación con la agenda del niñe: zombies, cumpleaños, animales, etc. Si no encontrás el tuyo, podes crear uno nuevo con el botón + 
+                  El TRAYECTO permite agrupar experiencias con objetivos comunes. 
                 </Label>
               </Form.Field>
               <Form.Field>
@@ -354,8 +354,8 @@ const renderModalInteres= () => (
       <Header as='h3'>
         <Icon name='braille' />
         <Header.Content>
-          NUEVO INTERÉS
-          <Header.Subheader>Aquí podrás crear un nuevo interés para tu experiencia.</Header.Subheader>
+          NUEVO TRAYECTO
+          <Header.Subheader>Aquí podrás crear un nuevo TRATECTO para tu experiencia.</Header.Subheader>
         </Header.Content>
       </Header>
       </Modal.Header>
@@ -367,12 +367,12 @@ const renderModalInteres= () => (
                        
        <Form.Field>
                  <Form.Input                   
-                  placeholder="NUEVO INTERÉS"                  
+                  placeholder="NUEVO TRAYECTO"                  
                   onChange={handleNuevoInteres}
                 />
 
                 <Label pointing  color='teal'>
-                  Debe ser un sustantivo que funcione como una categoría de interés, por ejemplo: CUMPLEAÑO, FIESTA, ZOMBIS, VAMPIROS, etc.  
+                  Un nombre representativo de las expereriencias que agrupa  
                 </Label>
        </Form.Field>
            
@@ -387,7 +387,7 @@ const renderModalInteres= () => (
 
         
         <Button color="purple" onClick={handleSubmitInteres} disabled={btnGuardar}>
-            GUARDAR INTERÉS
+            GUARDAR TRAYECTO
           </Button>
       </Modal.Actions>
     </Modal>

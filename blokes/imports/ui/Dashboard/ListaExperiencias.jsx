@@ -123,7 +123,7 @@ function eliminarExp(laExp){
   }
 
 function btnEliminar (laExp) {
-  if ((laExp.createdBy === Meteor.userId()) || (Meteor.user().emails[0].address=="pasayo@fi.uncoma.edu.ar" ))
+  if ((Meteor.user().emails) && ((laExp.createdBy === Meteor.userId()) || (Meteor.user().emails[0].address=="pasayo@fi.uncoma.edu.ar" )))
     botonSave = <Button content='Borrar' icon='erase' labelPosition='right' color="teal" onClick={() => {setOpenConfirm(true)}}/>
 
 
@@ -211,6 +211,7 @@ const userLoading = useTracker(() => {
 function creadore(idx){
   let rta= ""
   if (idx) {
+    if (Meteor.users.findOne(idx).emails)
       rta= Meteor.users.findOne(idx).emails[0].address;
   }
   return rta;
